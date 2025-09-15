@@ -6,15 +6,14 @@ import { AnimatedCard, FadeInText, AnimatedButton } from "@/components";
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+    <div className="font-sans grid grid-rows-[1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 bg-[#f9f9f9]">
+      <main className="flex flex-col gap-[32px] row-start-1 items-center sm:items-start">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
           <Image
-            className="dark:invert"
             src="/next.svg"
             alt="Next.js logo"
             width={180}
@@ -31,7 +30,7 @@ export default function Home() {
         >
           <li className="mb-2 tracking-[-.01em]">
             Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
+            <code className="bg-black/[.05] font-mono font-semibold px-1 py-0.5 rounded">
               src/app/page.tsx
             </code>
             .
@@ -56,7 +55,6 @@ export default function Home() {
             whileTap={{ scale: 0.95 }}
           >
             <Image
-              className="dark:invert"
               src="/vercel.svg"
               alt="Vercel logomark"
               width={20}
@@ -65,7 +63,7 @@ export default function Home() {
             Deploy now
           </motion.a>
           <motion.a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
+            className="rounded-full border border-solid border-black/[.08] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
             href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
             target="_blank"
             rel="noopener noreferrer"
@@ -79,10 +77,10 @@ export default function Home() {
         {/* Framer Motion 예시 섹션 */}
         <FadeInText delay={0.8} className="w-full max-w-4xl">
           <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">
               Framer Motion 애니메이션 예시
             </h2>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-gray-600">
               아래 카드들을 호버하고 클릭해보세요!
             </p>
           </div>
@@ -132,14 +130,14 @@ export default function Home() {
           <AnimatedButton
             delay={1.8}
             href="https://www.framer.com/motion/"
-            className="px-6 py-3 border border-indigo-600 text-indigo-600 rounded-lg font-medium hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-colors"
+            className="px-6 py-3 border border-indigo-600 text-indigo-600 rounded-lg font-medium hover:bg-indigo-50 transition-colors"
           >
             Framer Motion 문서
           </AnimatedButton>
         </div>
       </main>
       <motion.footer
-        className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center"
+        className="row-start-2 flex gap-[24px] flex-wrap items-center justify-center"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.6 }}
