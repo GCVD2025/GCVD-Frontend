@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import ALLIcon from "@/components/icons/ALLIcon";
 import BrandingIcon from "@/components/icons/BrandingIcon";
 import GraphicIcon from "@/components/icons/GraphicIcon";
@@ -14,19 +14,15 @@ import GameIcon from "@/components/icons/GameIcon";
 import { hexToRgb } from "@/utils/color";
 
 export function FilterSidebar() {
-  // Why: 쿼리스트링에서 현재 선택된 필터 값을 가져오기 위한 훅
-  // What: useSearchParams로 URL의 쿼리 파라미터에 접근한다
-  // How: Next.js의 useSearchParams 훅을 사용해 현재 URL의 쿼리스트링을 읽는다
+  // URL 쿼리스트링 및 라우팅 관리
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
 
-  // Why: 3초 후 사이드바를 숨기고 hover 시 다시 보이게 하기 위한 상태 관리
-  // What: isHidden 상태로 사이드바의 표시/숨김을 제어한다
-  // How: useState와 useEffect를 사용해 3초 후 자동으로 숨김 처리한다
+  // 사이드바 자동 숨김 상태 관리
   const [isHidden, setIsHidden] = useState(false);
 
-  // Why: 컴포넌트 마운트 후 3초 뒤에 사이드바를 숨기기 위한 타이머 설정
-  // What: useEffect로 3초 후 isHidden을 true로 변경한다
-  // How: setTimeout을 사용해 3000ms 후 상태를 업데이트한다
+  // 3초 후 사이드바 자동 숨김
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsHidden(true);
@@ -41,15 +37,12 @@ export function FilterSidebar() {
     "flex justify-end items-center gap-2 cursor-pointer group relative";
   const ICON_SIZE = 36;
 
-  // Why: hover 효과를 class로 제어하던 것을 제거하고, 아이콘 색상을 명시적으로 전달해 일관성을 높인다
-  // What: items의 속성을 hoverClass -> icon_color로 변경하고, Icon에는 class 대신 color(style)만 전달한다
-  // How: Icon 컴포넌트가 currentColor를 사용하므로 style.color를 넘겨 색상을 지정한다
-
+  // 필터 아이템 정의
   const items: {
     label: string;
     Icon: React.FC<React.SVGProps<SVGSVGElement>>;
-    icon_color: string; // 예: "#FF66A4"
-    queryKey: string; // 쿼리스트링에서 사용할 키값
+    icon_color: string;
+    queryKey: string;
   }[] = [
     { label: "ALL", Icon: ALLIcon, icon_color: "#FF66A4", queryKey: "all" },
     {
@@ -92,9 +85,34 @@ export function FilterSidebar() {
     { label: "Game", Icon: GameIcon, icon_color: "#8DC9F7", queryKey: "game" },
   ];
 
-  // Why: hover 시 아이콘 컬러를 기반으로 옅은 gradient/glow 생성 시 HEX→RGB 변환이 필요
-  // What: 공용 유틸 `hexToRgb`를 사용해 rgba(...) 값을 계산한다
-  // How: 동적 임의값 클래스 대신 인라인 스타일에만 색/알파를 주입하고, 표시 토글은 group-hover로 담당
+  /**
+   * 필터 선택 정책
+   *
+   * 1. 기본 상태: 쿼리스트링이 없을 때 "ALL" 필터가 활성화됨
+   * 2. 단일 선택: 한 번에 하나의 필터만 선택 가능
+   * 3. 선택된 필터 클릭: 아무 일도 일어나지 않음 (해제되지 않음)
+   * 4. 다른 필터 클릭: 기존 선택 해제 후 새로운 필터 선택
+   * 5. 쿼리스트링 관리: 선택된 필터는 ?filterKey=true 형태로 URL에 반영
+   */
+  const handleFilterClick = (queryKey: string) => {
+    // 현재 선택된 필터인지 확인 (기본값 all 고려)
+    const isCurrentlyActive =
+      searchParams.toString() === ""
+        ? queryKey === "all"
+        : searchParams.get(queryKey) !== null;
+
+    // 선택된 필터를 다시 클릭하면 아무 일도 일어나지 않음
+    if (isCurrentlyActive) {
+      return;
+    }
+
+    // 다른 필터를 클릭하면 해당 필터만 선택
+    const params = new URLSearchParams();
+    params.set(queryKey, "true");
+    router.push(`${pathname}?${params.toString()}`);
+  };
+
+  // hover 효과를 위한 색상 변환 유틸리티 사용
 
   return (
     <aside
@@ -103,9 +121,7 @@ export function FilterSidebar() {
       }`}
       onMouseEnter={() => setIsHidden(false)}
       onMouseLeave={() => {
-        // Why: 마우스가 벗어나면 다시 3초 후에 숨김 처리하기 위한 타이머 재설정
-        // What: hover가 끝나면 3초 후 다시 숨김 상태로 변경한다
-        // How: setTimeout을 사용해 3초 후 isHidden을 true로 설정한다
+        // 마우스가 벗어나면 3초 후 다시 숨김
         setTimeout(() => {
           setIsHidden(true);
         }, 3000);
@@ -115,17 +131,17 @@ export function FilterSidebar() {
         {items.map(({ label, Icon, icon_color, queryKey }) => {
           const { r, g, b } = hexToRgb(icon_color);
 
-          // Why: 쿼리스트링에서 현재 아이템이 활성화되어 있는지 확인
-          // What: searchParams에서 해당 queryKey가 존재하는지 체크한다
-          // How: searchParams.get()으로 쿼리 파라미터 값을 확인하고, 존재하면 active 상태로 판단한다
-          const isActive = searchParams.get(queryKey) !== null;
-
-          console.log(isActive);
+          // 현재 필터가 활성화되어 있는지 확인 (기본값 all 고려)
+          const isActive =
+            searchParams.toString() === ""
+              ? queryKey === "all"
+              : searchParams.get(queryKey) !== null;
 
           return (
             <li
               key={label}
               className={ITEM_CLASS}
+              onClick={() => handleFilterClick(queryKey)}
               style={
                 {
                   "--icon-shadow-color": `rgba(${r},${g},${b},0.6)`,
@@ -133,7 +149,7 @@ export function FilterSidebar() {
                 } as React.CSSProperties
               }
             >
-              {/* 텍스트: 기본 텍스트 + 같은 위치의 gradient 오버레이를 hover에만 노출 */}
+              {/* 필터 텍스트 */}
               <span className="relative inline-block">
                 <span
                   className={`font-medium transition-[font-weight,color,filter] filter group-hover:drop-shadow-[0_0_5px_var(--icon-shadow-color)] ${
@@ -144,12 +160,12 @@ export function FilterSidebar() {
                 </span>
               </span>
 
-              {/* 아이콘: 기존 컬러 전환 + drop-shadow 오버레이 (hover 시만) */}
-              <span className={`relative cursor-pointer`}>
+              {/* 필터 아이콘 */}
+              <span className="relative cursor-pointer">
                 <Icon
                   width={ICON_SIZE}
                   height={ICON_SIZE}
-                  // fill="currentColor"
+                  fill="currentColor"
                   className={`transition-colors text-[var(--icon-color)] group-hover:text-[${icon_color}] filter group-hover:drop-shadow-[0_0_5px_var(--icon-shadow-color)]`}
                 />
               </span>
