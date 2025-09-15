@@ -9,11 +9,13 @@ import EditorialIcon from "@/components/icons/EditorialIcon";
 import MediaIcon from "@/components/icons/MediaIcon";
 import ThreeDIcon from "@/components/icons/ThreeDIcon";
 import GameIcon from "@/components/icons/GameIcon";
+import { hexToRgb } from "@/utils/color";
 
 export function FilterSidebar() {
   const CONTAINER_CLASS =
-    "flex flex-col gap-[20px] sticky top-12 backdrop-blur-sm text-[14px] leading-[20px] font-medium py-[54px] pr-[38px] rounded-[12px] w-[200px] bg-white shadow-[0_0_32px_0_rgba(0,0,0,0.05)] text-right";
-  const ITEM_CLASS = "flex justify-end items-center gap-2 cursor-pointer group";
+    "flex flex-col gap-[26px] sticky top-12 backdrop-blur-sm text-[14px] leading-[20px] font-medium py-[54px] pr-[38px] rounded-[12px] w-[200px] bg-white shadow-[0_0_32px_0_rgba(0,0,0,0.05)] text-right";
+  const ITEM_CLASS =
+    "flex justify-end items-center gap-2 cursor-pointer group relative";
   const ICON_SIZE = 36;
 
   // Why: hover 효과를 class로 제어하던 것을 제거하고, 아이콘 색상을 명시적으로 전달해 일관성을 높인다
@@ -60,28 +62,52 @@ export function FilterSidebar() {
     { label: "Game", Icon: GameIcon, icon_color: "#8DC9F7" },
   ];
 
-  return (
-    <aside className="w-[220px] flex-shrink-0 relative z-50">
-      <ul className={CONTAINER_CLASS}>
-        {items.map(({ label, Icon, icon_color }) => (
-          <li key={label} className={ITEM_CLASS}>
-            {/* 텍스트: 기본 medium, hover 시 extrabold + color 변경 */}
-            <span
-              className={`font-medium transition-[font-weight,color] group-hover:font-extrabold group-hover:text-[#202020] text-[#20202099] cursor-pointer`}
-            >
-              {label}
-            </span>
+  // Why: hover 시 아이콘 컬러를 기반으로 옅은 gradient/glow 생성 시 HEX→RGB 변환이 필요
+  // What: 공용 유틸 `hexToRgb`를 사용해 rgba(...) 값을 계산한다
+  // How: 동적 임의값 클래스 대신 인라인 스타일에만 색/알파를 주입하고, 표시 토글은 group-hover로 담당
 
-            {/* 아이콘: 명시적 color(style) 전달 */}
-            <span className={`cursor-pointer`}>
-              <Icon
-                width={ICON_SIZE}
-                height={ICON_SIZE}
-                className={`transition-colors text-[#00A78E33] group-hover:text-[${icon_color}]`}
-              />
-            </span>
-          </li>
-        ))}
+  return (
+    <aside className="w-60 left-[-10px] flex-shrink-0 relative z-50">
+      <ul className={CONTAINER_CLASS}>
+        {items.map(({ label, Icon, icon_color }) => {
+          const { r, g, b } = hexToRgb(icon_color);
+
+          return (
+            <li
+              key={label}
+              className={ITEM_CLASS}
+              style={
+                {
+                  "--icon-shadow-color": `rgba(${r},${g},${b},0.6)`,
+                } as React.CSSProperties
+              }
+            >
+              {/* 텍스트: 기본 텍스트 + 같은 위치의 gradient 오버레이를 hover에만 노출 */}
+              <span className="relative inline-block">
+                <span
+                  className={`font-medium text-[#20202099] group-hover:text-[#202020] transition-[font-weight,color] filter group-hover:drop-shadow-[0_0_5px_var(--icon-shadow-color)]`}
+                >
+                  {label}
+                </span>
+              </span>
+
+              {/* 아이콘: 기존 컬러 전환 + drop-shadow 오버레이 (hover 시만) */}
+              <span
+                style={{
+                  color: icon_color,
+                }}
+                className={`relative cursor-pointer`}
+              >
+                <Icon
+                  width={ICON_SIZE}
+                  height={ICON_SIZE}
+                  fill="currentColor"
+                  className={`transition-colors text-[#00A78E33] group-hover:text-[${icon_color}] filter group-hover:drop-shadow-[0_0_5px_var(--icon-shadow-color)]`}
+                />
+              </span>
+            </li>
+          );
+        })}
       </ul>
     </aside>
   );
