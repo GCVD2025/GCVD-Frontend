@@ -1,0 +1,79 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+
+# 🎨 Graduation Exhibition Publishing Development Guidelines
+
+## 1. Project Goal
+
+- Build a static website (SSG) for the graduation exhibition.
+- Ensure that the intention and experience of the exhibition are fully delivered online.
+- Guarantee basic accessibility and stability.
+
+---
+
+## 2. Tech Stack
+
+- **Framework**: Next.js (SSG)
+- **Language/Libraries**: React, TypeScript
+- **Styling**: Tailwind CSS
+- **Animation**: Framer Motion
+
+---
+
+## 3. Development Guidelines
+
+### 3-1. Markup & Structure
+
+- Use semantic HTML tags (`<main>`, `<section>`, `<figure>`, etc.)
+- Design reusable components and a common layout structure.
+
+### 3-2. Image Handling
+
+- Do **not** use `next/image`.
+- Use the standard `<img>` tag.
+
+### 3-3. Layout & Responsiveness
+
+- Support only screen sizes **1280px and above**.
+- Do not implement unnecessary responsive layouts.
+
+### 3-4. Code Writing Principles
+
+- Implement **only** what is specified in this guideline.
+- Do not add features or styles arbitrarily.
+- Always understand and verify your own code and output.
+- **Analyze existing codebase patterns** and follow the same style and structure.
+- **Always include comments explaining Why / What / How for your code.**
+
+```ts
+// Why: Why is this code necessary?
+// What: What does this code implement?
+// How: How is this code implemented?
+```
+
+3-5. Responsibility
+
+The full responsibility for structure, implementation, and documentation lies entirely with the guideline author.
+
+Junior developers must strictly follow the guideline and hold no responsibility for the outcome.
+
+4. Quality Verification
+
+Browser testing: Check on Chrome, Safari, and Edge.
+
+Accessibility check: Ensure basic alt text, keyboard navigation, and contrast ratio.
+
+5. Documentation
+
+Each directory must include a README.md containing:
+
+Project overview
+
+Directory structure
+
+Key rules summary
+
+Always read the corresponding README before starting code work.
