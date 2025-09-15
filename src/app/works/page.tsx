@@ -1,76 +1,38 @@
 "use client";
 
-import { motion } from "framer-motion";
+import FilterSidebar from "./FilterSidebar";
 
 export default function Works() {
   return (
     <div className="min-h-screen bg-[#f9f9f9]">
-      <main className="flex max-w-7xl mx-auto mt-8 px-4">
+      <main className="py-6 flex">
         {/* 좌측 필터 사이드바 */}
-        <aside className="w-48">
-          <ul className="space-y-4 text-sm text-gray-600 font-medium">
-            <li className="text-pink-500 font-bold text-lg">ALL</li>
-            <li className="flex items-center space-x-2">
-              <span className="w-5 h-5 bg-cyan-200 rounded"></span>
-              <span>Branding</span>
-            </li>
-            <li className="flex items-center space-x-2">
-              <span className="w-5 h-5 bg-cyan-200 rounded"></span>
-              <span>Graphic</span>
-            </li>
-            <li className="flex items-center space-x-2">
-              <span className="w-5 h-5 bg-cyan-200 rounded"></span>
-              <span>UI/UX</span>
-            </li>
-            <li className="flex items-center space-x-2">
-              <span className="w-5 h-5 bg-cyan-200 rounded"></span>
-              <span>Illust</span>
-            </li>
-            <li className="flex items-center space-x-2">
-              <span className="w-5 h-5 bg-cyan-200 rounded"></span>
-              <span>Editorial</span>
-            </li>
-            <li className="flex items-center space-x-2">
-              <span className="w-5 h-5 bg-cyan-200 rounded"></span>
-              <span>Media</span>
-            </li>
-            <li className="flex items-center space-x-2">
-              <span className="w-5 h-5 bg-cyan-200 rounded"></span>
-              <span>3D</span>
-            </li>
-            <li className="flex items-center space-x-2">
-              <span className="w-5 h-5 bg-cyan-200 rounded"></span>
-              <span>Game</span>
-            </li>
-          </ul>
-        </aside>
+        <FilterSidebar />
 
-        {/* 프로젝트 카드 그리드 */}
-        <section className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 ml-8">
-          {/* 카드 예시들 */}
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((work) => (
-            <motion.div
-              key={work}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: work * 0.1 }}
-              className="bg-white rounded-lg overflow-hidden shadow-md border"
-            >
-              <div className="bg-gray-200 h-48"></div>
-              <div className="p-4">
-                <h3 className="text-sm font-bold">프로젝트 제목 {work}</h3>
-                <p className="text-xs text-gray-500 mb-2">홍길동</p>
-                <div className="flex flex-wrap gap-2 text-xs">
-                  <span className="flex items-center gap-1 text-orange-400 font-medium">
-                    Branding
-                  </span>
-                  <span className="flex items-center gap-1 text-pink-400 font-medium">
-                    Illust
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+        {/* Why: 제공된 시안에 맞는 단일 마크업만 남기기 위함 */}
+        {/* What: 240x308, radius 12, 흰색 그라데이션(80%→40%), 그림자 blur 24, 배경 블러 16 */}
+        {/* How: grid 3열 레이아웃 + Tailwind 임의 값 클래스로 gradient/shadow/backdrop-blur 지정 */}
+        <section className="w-full absolute left-[50%] translate-x-[-50%] mx-auto grid [grid-template-columns:repeat(3,240px)] gap-x-[20px] gap-y-[24px] justify-center">
+          <div
+            className="w-[240px] h-[308px] rounded-[12px] 
+            bg-[linear-gradient(180deg,rgba(255,255,255,0.8)_0%,rgba(255,255,255,0.4)_100%)]
+            shadow-[0_0_24px_rgba(0,0,0,0.05)] backdrop-blur-[16px]"
+          />
+          <div
+            className="w-[240px] h-[308px] rounded-[12px] 
+            bg-[linear-gradient(180deg,rgba(255,255,255,0.8)_0%,rgba(255,255,255,0.4)_100%)]
+            shadow-[0_0_24px_rgba(0,0,0,0.05)] backdrop-blur-[16px]"
+          />
+          <div
+            className="w-[240px] h-[308px] rounded-[12px] 
+            bg-[linear-gradient(180deg,rgba(255,255,255,0.8)_0%,rgba(255,255,255,0.4)_100%)]
+            shadow-[0_0_24px_rgba(0,0,0,0.05)] backdrop-blur-[16px]"
+          />
+          <div
+            className="w-[240px] h-[308px] rounded-[12px] 
+            bg-[linear-gradient(180deg,rgba(255,255,255,0.8)_0%,rgba(255,255,255,0.4)_100%)]
+            shadow-[0_0_24px_rgba(0,0,0,0.05)] backdrop-blur-[16px]"
+          />
         </section>
       </main>
     </div>
