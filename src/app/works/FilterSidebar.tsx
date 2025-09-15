@@ -19,17 +19,29 @@ export function FilterSidebar() {
   const router = useRouter();
   const pathname = usePathname();
 
+  /**
+   * 사이드바 마우스 인터랙션 정책
+   *
+   * 1. 초기 상태: 컴포넌트 마운트 후 3초 뒤 자동 숨김
+   * 2. 마우스 hover: 즉시 표시, hover 중에는 움직이지 않음
+   * 3. 마우스 leave: hover 상태 해제 후 3초 뒤 숨김
+   * 4. 상태 우선순위: hover > 자동 숨김 (hover 중에는 자동 숨김 무시)
+   */
+
   // 사이드바 자동 숨김 상태 관리
   const [isHidden, setIsHidden] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
-  // 3초 후 사이드바 자동 숨김
+  // 3초 후 사이드바 자동 숨김 (hover 상태가 아닐 때만)
   useEffect(() => {
     const timer = setTimeout(() => {
-      setIsHidden(true);
+      if (!isHovered) {
+        setIsHidden(true);
+      }
     }, 3000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [isHovered]);
 
   const CONTAINER_CLASS =
     "flex flex-col gap-[26px] sticky top-12 backdrop-blur-sm text-[14px] leading-[20px] font-medium py-[54px] pr-[38px] rounded-[12px] w-[200px] bg-white shadow-[0_0_32px_0_rgba(0,0,0,0.05)] text-right";
@@ -119,9 +131,14 @@ export function FilterSidebar() {
       className={`w-60 left-[-10px] flex-shrink-0 relative z-50 transition-transform duration-500 ease-in-out ${
         isHidden ? "-translate-x-[80px]" : "translate-x-0"
       }`}
-      onMouseEnter={() => setIsHidden(false)}
+      onMouseEnter={() => {
+        // 정책 2: 마우스 hover 시 즉시 표시, hover 상태 설정
+        setIsHidden(false);
+        setIsHovered(true);
+      }}
       onMouseLeave={() => {
-        // 마우스가 벗어나면 3초 후 다시 숨김
+        // 정책 3: 마우스 leave 시 hover 상태 해제, 3초 후 숨김
+        setIsHovered(false);
         setTimeout(() => {
           setIsHidden(true);
         }, 3000);
