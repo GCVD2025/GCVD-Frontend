@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import ALLIcon from "@/components/icons/ALLIcon";
 import BrandingIcon from "@/components/icons/BrandingIcon";
 import GraphicIcon from "@/components/icons/GraphicIcon";
@@ -13,6 +14,11 @@ import GameIcon from "@/components/icons/GameIcon";
 import { hexToRgb } from "@/utils/color";
 
 export function FilterSidebar() {
+  // Why: 쿼리스트링에서 현재 선택된 필터 값을 가져오기 위한 훅
+  // What: useSearchParams로 URL의 쿼리 파라미터에 접근한다
+  // How: Next.js의 useSearchParams 훅을 사용해 현재 URL의 쿼리스트링을 읽는다
+  const searchParams = useSearchParams();
+
   // Why: 3초 후 사이드바를 숨기고 hover 시 다시 보이게 하기 위한 상태 관리
   // What: isHidden 상태로 사이드바의 표시/숨김을 제어한다
   // How: useState와 useEffect를 사용해 3초 후 자동으로 숨김 처리한다
@@ -43,40 +49,47 @@ export function FilterSidebar() {
     label: string;
     Icon: React.FC<React.SVGProps<SVGSVGElement>>;
     icon_color: string; // 예: "#FF66A4"
+    queryKey: string; // 쿼리스트링에서 사용할 키값
   }[] = [
-    { label: "ALL", Icon: ALLIcon, icon_color: "#FF66A4" },
+    { label: "ALL", Icon: ALLIcon, icon_color: "#FF66A4", queryKey: "all" },
     {
       label: "Branding",
       Icon: BrandingIcon,
       icon_color: "#FFB297",
+      queryKey: "branding",
     },
     {
       label: "Graphic",
       Icon: GraphicIcon,
       icon_color: "#FF66A4",
+      queryKey: "graphic",
     },
     {
       label: "UI/UX",
       Icon: UiuxIcon,
       icon_color: "#8EA6F4",
+      queryKey: "uiux",
     },
     {
       label: "Illust",
       Icon: IllustIcon,
       icon_color: "#FF8585",
+      queryKey: "illust",
     },
     {
       label: "Editorial",
       Icon: EditorialIcon,
       icon_color: "#667CFF",
+      queryKey: "editorial",
     },
     {
       label: "Media",
       Icon: MediaIcon,
       icon_color: "#FF92C4",
+      queryKey: "media",
     },
-    { label: "3D", Icon: ThreeDIcon, icon_color: "#70D8CE" },
-    { label: "Game", Icon: GameIcon, icon_color: "#8DC9F7" },
+    { label: "3D", Icon: ThreeDIcon, icon_color: "#70D8CE", queryKey: "3d" },
+    { label: "Game", Icon: GameIcon, icon_color: "#8DC9F7", queryKey: "game" },
   ];
 
   // Why: hover 시 아이콘 컬러를 기반으로 옅은 gradient/glow 생성 시 HEX→RGB 변환이 필요
@@ -99,8 +112,15 @@ export function FilterSidebar() {
       }}
     >
       <ul className={CONTAINER_CLASS}>
-        {items.map(({ label, Icon, icon_color }) => {
+        {items.map(({ label, Icon, icon_color, queryKey }) => {
           const { r, g, b } = hexToRgb(icon_color);
+
+          // Why: 쿼리스트링에서 현재 아이템이 활성화되어 있는지 확인
+          // What: searchParams에서 해당 queryKey가 존재하는지 체크한다
+          // How: searchParams.get()으로 쿼리 파라미터 값을 확인하고, 존재하면 active 상태로 판단한다
+          const isActive = searchParams.get(queryKey) !== null;
+
+          console.log(isActive);
 
           return (
             <li
@@ -109,13 +129,14 @@ export function FilterSidebar() {
               style={
                 {
                   "--icon-shadow-color": `rgba(${r},${g},${b},0.6)`,
+                  "--icon-color": isActive ? icon_color : "#00A78E33",
                 } as React.CSSProperties
               }
             >
               {/* 텍스트: 기본 텍스트 + 같은 위치의 gradient 오버레이를 hover에만 노출 */}
               <span className="relative inline-block">
                 <span
-                  className={`font-medium text-[#20202099] group-hover:text-[#202020] transition-[font-weight,color,filter] filter group-hover:drop-shadow-[0_0_5px_var(--icon-shadow-color)] ${
+                  className={`font-medium transition-[font-weight,color,filter] filter group-hover:drop-shadow-[0_0_5px_var(--icon-shadow-color)] ${
                     isHidden ? "blur-sm" : "blur-0"
                   }`}
                 >
@@ -124,17 +145,12 @@ export function FilterSidebar() {
               </span>
 
               {/* 아이콘: 기존 컬러 전환 + drop-shadow 오버레이 (hover 시만) */}
-              <span
-                style={{
-                  color: icon_color,
-                }}
-                className={`relative cursor-pointer`}
-              >
+              <span className={`relative cursor-pointer`}>
                 <Icon
                   width={ICON_SIZE}
                   height={ICON_SIZE}
-                  fill="currentColor"
-                  className={`transition-colors text-[#00A78E33] group-hover:text-[${icon_color}] filter group-hover:drop-shadow-[0_0_5px_var(--icon-shadow-color)]`}
+                  // fill="currentColor"
+                  className={`transition-colors text-[var(--icon-color)] group-hover:text-[${icon_color}] filter group-hover:drop-shadow-[0_0_5px_var(--icon-shadow-color)]`}
                 />
               </span>
             </li>
