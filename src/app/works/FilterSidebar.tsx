@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import ALLIcon from "@/components/icons/ALLIcon";
 import BrandingIcon from "@/components/icons/BrandingIcon";
 import GraphicIcon from "@/components/icons/GraphicIcon";
@@ -12,6 +13,22 @@ import GameIcon from "@/components/icons/GameIcon";
 import { hexToRgb } from "@/utils/color";
 
 export function FilterSidebar() {
+  // Why: 3초 후 사이드바를 숨기고 hover 시 다시 보이게 하기 위한 상태 관리
+  // What: isHidden 상태로 사이드바의 표시/숨김을 제어한다
+  // How: useState와 useEffect를 사용해 3초 후 자동으로 숨김 처리한다
+  const [isHidden, setIsHidden] = useState(false);
+
+  // Why: 컴포넌트 마운트 후 3초 뒤에 사이드바를 숨기기 위한 타이머 설정
+  // What: useEffect로 3초 후 isHidden을 true로 변경한다
+  // How: setTimeout을 사용해 3000ms 후 상태를 업데이트한다
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsHidden(true);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const CONTAINER_CLASS =
     "flex flex-col gap-[26px] sticky top-12 backdrop-blur-sm text-[14px] leading-[20px] font-medium py-[54px] pr-[38px] rounded-[12px] w-[200px] bg-white shadow-[0_0_32px_0_rgba(0,0,0,0.05)] text-right";
   const ITEM_CLASS =
@@ -67,7 +84,20 @@ export function FilterSidebar() {
   // How: 동적 임의값 클래스 대신 인라인 스타일에만 색/알파를 주입하고, 표시 토글은 group-hover로 담당
 
   return (
-    <aside className="w-60 left-[-10px] flex-shrink-0 relative z-50">
+    <aside
+      className={`w-60 left-[-10px] flex-shrink-0 relative z-50 transition-transform duration-500 ease-in-out ${
+        isHidden ? "-translate-x-[80px]" : "translate-x-0"
+      }`}
+      onMouseEnter={() => setIsHidden(false)}
+      onMouseLeave={() => {
+        // Why: 마우스가 벗어나면 다시 3초 후에 숨김 처리하기 위한 타이머 재설정
+        // What: hover가 끝나면 3초 후 다시 숨김 상태로 변경한다
+        // How: setTimeout을 사용해 3초 후 isHidden을 true로 설정한다
+        setTimeout(() => {
+          setIsHidden(true);
+        }, 3000);
+      }}
+    >
       <ul className={CONTAINER_CLASS}>
         {items.map(({ label, Icon, icon_color }) => {
           const { r, g, b } = hexToRgb(icon_color);
@@ -85,7 +115,9 @@ export function FilterSidebar() {
               {/* 텍스트: 기본 텍스트 + 같은 위치의 gradient 오버레이를 hover에만 노출 */}
               <span className="relative inline-block">
                 <span
-                  className={`font-medium text-[#20202099] group-hover:text-[#202020] transition-[font-weight,color] filter group-hover:drop-shadow-[0_0_5px_var(--icon-shadow-color)]`}
+                  className={`font-medium text-[#20202099] group-hover:text-[#202020] transition-[font-weight,color,filter] filter group-hover:drop-shadow-[0_0_5px_var(--icon-shadow-color)] ${
+                    isHidden ? "blur-sm" : "blur-0"
+                  }`}
                 >
                   {label}
                 </span>
