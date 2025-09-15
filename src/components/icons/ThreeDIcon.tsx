@@ -24,7 +24,6 @@ const ThreeDIcon: React.FC<ThreeDIconProps> = ({
     <path
       d="M32.6154 12.1721V26.5777L18.3061 34.7692L4 26.5777V12.2804L8.62726 14.9387L9.72245 13.0634L4.35882 9.98729L18.3061 2L32.163 9.93158L26.7057 13.0634L27.7978 14.9387L32.6154 12.1721Z"
       fill="currentColor"
-      fillOpacity="0.2"
     />
   </svg>
 );

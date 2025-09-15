@@ -15,7 +15,7 @@ export default function Navigation({ className = "" }: NavigationProps) {
   // How: 상수로 스타일을 선언하고, 현재 경로와 비교해 클래스 문자열을 조합
   const LINK_BASE_CLASS = "w-[160px] text-center";
   const ACTIVE_LINK_CLASS =
-    "bg-[radial-gradient(circle_at_50%_140%,rgba(255,102,164,1),rgba(255,102,164,0.8)_35%,transparent_100%)] text-white px-6 py-2 rounded-full font-extrabold";
+    "bg-[radial-gradient(circle_at_50%_130%,rgba(255,102,164,1),rgba(255,102,164,0.8)_45%,transparent_100%)] text-white px-6 py-2 rounded-full font-extrabold";
   const INACTIVE_LINK_CLASS = "text-gray-700";
 
   const getLinkClass = (targetPath: string) => {

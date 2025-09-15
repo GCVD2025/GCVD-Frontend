@@ -24,7 +24,6 @@ const ALLIcon: React.FC<ALLIconProps> = ({
     <path
       d="M11.7946 31H4L13.1189 4H22.9189L32 31H24.2432L22.5973 25.7044H13.4216L11.7946 31ZM15.0865 20.3343H20.9324L18.1135 11.2721H17.8865L15.0865 20.3343Z"
       fill="currentColor"
-      fillOpacity="0.2"
     />
   </svg>
 );

@@ -24,7 +24,6 @@ const GraphicIcon: React.FC<GraphicIconProps> = ({
     <path
       d="M27.3578 16.7642V18.949H32.0769V32.5385H18.6138V27.8318H16.4631V32.5385H3V18.949H7.71918V16.7642H3V3H16.4631V7.88146H18.6138V3H32.0769V16.7642H27.3578Z"
       fill="currentColor"
-      fillOpacity="0.2"
     />
   </svg>
 );
