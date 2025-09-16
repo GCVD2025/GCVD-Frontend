@@ -23,7 +23,7 @@ export default function WorkCard({
         <img
           src={imageUrl || "/placeholder.jpg"}
           alt={title}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover rounded-[0_0_12px_12px]"
         />
       </div>
 

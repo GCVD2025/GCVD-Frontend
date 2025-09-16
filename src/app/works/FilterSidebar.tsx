@@ -110,13 +110,15 @@ export function FilterSidebar() {
                 {
                   "--icon-shadow-color": `rgba(${r},${g},${b},0.6)`,
                   "--icon-color": isActive ? icon_color : "#00A78E33",
+                  "--icon-hover-color": icon_color,
+                  "--text-color": isActive ? "#202020" : "#20202099",
                 } as React.CSSProperties
               }
             >
               {/* 필터 텍스트 */}
               <span className="relative inline-block">
                 <span
-                  className={`font-medium transition-[font-weight,color,filter] filter group-hover:drop-shadow-[0_0_5px_var(--icon-shadow-color)] ${
+                  className={`font-medium text-[var(--text-color)] group-hover:text-[#202020] transition-[font-weight,color,filter] filter group-hover:drop-shadow-[0_0_5px_var(--icon-shadow-color)] ${
                     isHidden ? "blur-sm" : "blur-0"
                   }`}
                 >
@@ -130,7 +132,7 @@ export function FilterSidebar() {
                   width={ICON_SIZE}
                   height={ICON_SIZE}
                   fill="currentColor"
-                  className={`transition-colors text-[var(--icon-color)] group-hover:text-[${icon_color}] filter group-hover:drop-shadow-[0_0_5px_var(--icon-shadow-color)]`}
+                  className={`transition-colors text-[var(--icon-color)] group-hover:text-[var(--icon-hover-color)] filter group-hover:drop-shadow-[0_0_5px_var(--icon-shadow-color)]`}
                 />
               </span>
             </li>
