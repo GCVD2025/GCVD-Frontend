@@ -52,7 +52,7 @@ export function FilterSidebar() {
   }, [isHovered]);
 
   const CONTAINER_CLASS =
-    "flex flex-col gap-[26px] sticky top-12 backdrop-blur-sm text-[14px] leading-[20px] font-medium py-[54px] pr-[38px] rounded-[12px] w-[200px] bg-white shadow-[0_0_32px_0_rgba(0,0,0,0.05)] text-right";
+    "flex flex-col gap-[26px] backdrop-blur-sm text-[14px] leading-[20px] font-medium py-[54px] pr-[38px] rounded-[12px] w-[200px] bg-white shadow-[0_0_32px_0_rgba(0,0,0,0.05)] text-right";
   const ITEM_CLASS =
     "flex justify-end items-center gap-5 cursor-pointer group relative";
   const ICON_SIZE = 36;
@@ -91,7 +91,7 @@ export function FilterSidebar() {
 
   return (
     <aside
-      className={`w-60 left-[-10px] flex-shrink-0 relative z-50 transition-transform duration-500 ease-in-out ${
+      className={`fixed top-0 w-60 left-[-10px] flex-shrink-0 relative z-50 transition-transform duration-500 ease-in-out ${
         isHidden ? "-translate-x-[80px]" : "translate-x-0"
       }`}
       onMouseEnter={() => {

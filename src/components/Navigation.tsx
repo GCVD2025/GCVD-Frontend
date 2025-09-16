@@ -37,9 +37,14 @@ export default function Navigation({ className = "" }: NavigationProps) {
 
   return (
     <header
-      className={`flex items-center justify-center shadow-sm ${className}`}
+      className={`fixed top-0 z-50 w-full flex items-center justify-center ${className}`}
     >
-      <nav className="mt-[20px] p-[6px] flex items-center justify-center gap-[6px] bg-white rounded-[100px]">
+      <nav
+        className="mt-[20px] p-[6px] flex items-center justify-center gap-[6px] bg-white/60 rounded-[100px] backdrop-blur-[20px] drop-shadow-[0_0_32px_0_rgba(0,0,0,0.05)]"
+        style={{
+          boxShadow: "0 0 32px 0 rgba(0, 0, 0, 0.05)",
+        }}
+      >
         {links.map(({ href, label }) => (
           <Link key={href} href={href} className={getLinkClass(href)}>
             {label}

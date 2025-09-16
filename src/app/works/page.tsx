@@ -92,7 +92,7 @@ export default function Works() {
         alt="background"
         className="fixed w-full h-full object-cover opacity-20"
       />
-      <main className="py-6 flex min-h-screen bg-[#f9f9f9]">
+      <main className="py-6 flex min-h-screen bg-[#f9f9f9] mt-18">
         {/* 좌측 필터 사이드바 */}
         <FilterSidebar />
 
