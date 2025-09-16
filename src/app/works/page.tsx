@@ -8,76 +8,91 @@ import WorkCard from "../../components/WorkCard";
 // How: 배열 형태로 작품 정보들을 구조화
 const worksData = [
   {
+    id: "1",
     title: "프로젝트 제목",
     author: "홍길동",
     categories: ["branding", "illust"],
   },
   {
+    id: "2",
     title: "프로젝트 제목",
     author: "홍길동",
     categories: ["branding", "illust"],
   },
   {
+    id: "3",
     title: "프로젝트 제목",
     author: "홍길동",
     categories: ["branding", "illust"],
   },
   {
+    id: "4",
     title: "프로젝트 제목",
     author: "홍길동",
     categories: ["branding", "illust"],
   },
   {
+    id: "5",
     title: "프로젝트 제목",
     author: "홍길동",
     categories: ["branding", "illust"],
   },
   {
+    id: "6",
     title: "프로젝트 제목",
     author: "홍길동",
     categories: ["branding", "illust"],
   },
   {
+    id: "7",
     title: "프로젝트 제목",
     author: "홍길동",
     categories: ["branding", "illust"],
   },
   {
+    id: "8",
     title: "프로젝트 제목",
     author: "홍길동",
     categories: ["branding", "illust"],
   },
   {
+    id: "9",
     title: "프로젝트 제목",
     author: "홍길동",
     categories: ["branding", "illust"],
   },
   {
+    id: "10",
     title: "프로젝트 제목",
     author: "홍길동",
     categories: ["branding", "illust"],
   },
   {
+    id: "11",
     title: "프로젝트 제목",
     author: "홍길동",
     categories: ["branding", "illust"],
   },
   {
+    id: "12",
     title: "프로젝트 제목",
     author: "홍길동",
     categories: ["branding", "illust"],
   },
   {
+    id: "13",
     title: "프로젝트 제목",
     author: "홍길동",
     categories: ["branding", "illust"],
   },
   {
+    id: "14",
     title: "프로젝트 제목",
     author: "홍길동",
     categories: ["branding", "illust"],
   },
   {
+    id: "15",
     title: "프로젝트 제목",
     author: "홍길동",
     categories: ["branding", "illust"],
@@ -103,7 +118,8 @@ export default function Works() {
         <section className="w-full mx-auto grid [grid-template-columns:repeat(3,240px)] gap-x-[20px] gap-y-[24px] justify-center">
           {worksData.map((work, index) => (
             <WorkCard
-              key={index}
+              key={work.id}
+              id={work.id}
               title={work.title}
               author={work.author}
               categories={work.categories}

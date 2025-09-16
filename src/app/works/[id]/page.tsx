@@ -1,5 +1,6 @@
 "use client";
 
+import { use } from "react";
 import { EmailIcon, InstagramIcon } from "@/components/icons";
 import { getCategoriesByQueryKeys } from "@/utils/categories";
 
@@ -7,15 +8,19 @@ import { getCategoriesByQueryKeys } from "@/utils/categories";
 // What: URL 파라미터로부터 받는 작품 ID 타입
 // How: Next.js의 params를 통해 동적 라우팅 파라미터를 받음
 interface WorkDetailPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 // Why: 작품 상세 정보를 표시하는 페이지
 // What: FilterSidebar와 동일한 스타일의 왼쪽 사이드바와 작품 이미지가 있는 페이지
 // How: Next.js 동적 라우팅을 사용하여 작품 ID별로 페이지 생성
 export default function WorkDetailPage({ params }: WorkDetailPageProps) {
+  // Why: Next.js 15에서 params가 Promise로 변경되어 unwrap 필요
+  // What: params Promise를 unwrap하여 실제 params 객체에 접근
+  // How: React.use()를 사용하여 Promise를 unwrap
+  const { id } = use(params);
   // Why: 작품 상세 정보 데이터 (실제로는 API에서 가져와야 함)
   // What: 작품의 제목, 부제목, 작가, 카테고리, 설명 등
   // How: 하드코딩된 데이터를 사용하여 UI 구성
@@ -101,12 +106,12 @@ export default function WorkDetailPage({ params }: WorkDetailPageProps) {
         <section className="w-full mx-auto flex flex-col items-center justify-center gap-4 ml-72 mr-[51px]">
           <img
             src="/images/works/detail/detail_sample1.png"
-            alt={`작품 ${params.id}`}
+            alt={`작품 ${id}`}
             className="max-w-full object-contain rounded-lg shadow-lg"
           />
           <img
             src="/images/works/detail/detail-sample2.png"
-            alt={`작품 ${params.id}`}
+            alt={`작품 ${id}`}
             className="max-w-full  object-contain rounded-lg shadow-lg"
           />
         </section>
