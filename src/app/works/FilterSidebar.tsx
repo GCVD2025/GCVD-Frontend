@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { categories } from "@/utils/categories";
 import { hexToRgb } from "@/utils/color";
@@ -24,15 +24,31 @@ export function FilterSidebar() {
   const [isHidden, setIsHidden] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
+  // 타이머 참조를 위한 ref
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // 타이머 정리 함수
+  const clearHideTimer = () => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+  };
+
   // 3초 후 사이드바 자동 숨김 (hover 상태가 아닐 때만)
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!isHovered) {
-        setIsHidden(true);
-      }
-    }, 3000);
+    // 기존 타이머 정리
+    clearHideTimer();
 
-    return () => clearTimeout(timer);
+    // hover 상태가 아닐 때만 타이머 설정
+    if (!isHovered) {
+      timerRef.current = setTimeout(() => {
+        setIsHidden(true);
+        timerRef.current = null;
+      }, 3000);
+    }
+
+    return () => clearHideTimer();
   }, [isHovered]);
 
   const CONTAINER_CLASS =
@@ -84,11 +100,8 @@ export function FilterSidebar() {
         setIsHovered(true);
       }}
       onMouseLeave={() => {
-        // 정책 3: 마우스 leave 시 hover 상태 해제, 3초 후 숨김
+        // 정책 3: 마우스 leave 시 hover 상태 해제 (useEffect에서 타이머 관리)
         setIsHovered(false);
-        setTimeout(() => {
-          setIsHidden(true);
-        }, 3000);
       }}
     >
       <ul className={CONTAINER_CLASS}>
