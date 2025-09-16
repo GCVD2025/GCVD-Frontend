@@ -1,40 +1,93 @@
 "use client";
 
 import { motion } from "framer-motion";
+import DesignerCard from "../../components/DesignerCard";
+
+// Why: 디자이너 데이터를 상수로 분리하여 재사용성과 유지보수성 향상
+// What: 디자이너 목록 데이터 정의
+// How: 배열 형태로 디자이너 정보들을 구조화
+const designersData = [
+  {
+    name: "홍길동",
+    nameEn: "Hong Gil Dong",
+    workTitle: "작품명",
+    email: "email@gmail.com",
+  },
+  {
+    name: "김철수",
+    nameEn: "Kim Chul Soo",
+    workTitle: "작품명",
+    email: "kim@gmail.com",
+  },
+  {
+    name: "이영희",
+    nameEn: "Lee Young Hee",
+    workTitle: "작품명",
+    email: "lee@gmail.com",
+  },
+  {
+    name: "박민수",
+    nameEn: "Park Min Soo",
+    workTitle: "작품명",
+    email: "park@gmail.com",
+  },
+  {
+    name: "정수진",
+    nameEn: "Jung Soo Jin",
+    workTitle: "작품명",
+    email: "jung@gmail.com",
+  },
+  {
+    name: "최현우",
+    nameEn: "Choi Hyun Woo",
+    workTitle: "작품명",
+    email: "choi@gmail.com",
+  },
+  {
+    name: "한지은",
+    nameEn: "Han Ji Eun",
+    workTitle: "작품명",
+    email: "han@gmail.com",
+  },
+  {
+    name: "윤태호",
+    nameEn: "Yoon Tae Ho",
+    workTitle: "작품명",
+    email: "yoon@gmail.com",
+  },
+];
 
 export default function Designers() {
   return (
-    <div className="min-h-screen bg-[#f9f9f9]">
-      <main className="container mx-auto px-8 py-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="max-w-6xl mx-auto"
-        >
-          <h1 className="text-4xl font-bold text-gray-900 mb-8">Designers</h1>
+    <>
+      <img
+        src="/images/common/background-image.png"
+        alt="background"
+        className="fixed w-full h-full object-cover opacity-20"
+      />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3, 4, 5, 6].map((designer) => (
-              <motion.div
-                key={designer}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: designer * 0.1 }}
-                className="bg-white rounded-lg shadow-lg p-6"
-              >
-                <div className="w-full h-48 bg-gray-200 rounded-lg mb-4"></div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                  디자이너 {designer}
-                </h3>
-                <p className="text-gray-600">
-                  디자이너 소개 텍스트가 들어갈 자리입니다.
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+      <main className="py-6 min-h-screen mt-18 relative">
+        {/* Why: 디자이너 카드들을 그리드 레이아웃으로 배치하여 일관된 간격 유지 */}
+        {/* What: 4열 그리드로 디자이너 카드들을 배치하는 섹션 */}
+        {/* How: CSS Grid를 사용하여 240px 너비의 카드들을 20px 간격으로 배치 */}
+        <section className="w-full mx-auto grid [grid-template-columns:repeat(4,auto)] gap-x-[20px] gap-y-[24px] justify-center">
+          {designersData.map((designer, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+            >
+              <DesignerCard
+                name={designer.name}
+                nameEn={designer.nameEn}
+                workTitle={designer.workTitle}
+                email={designer.email}
+              />
+            </motion.div>
+          ))}
+        </section>
       </main>
-    </div>
+    </>
   );
 }

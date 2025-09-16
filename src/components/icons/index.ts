@@ -1,0 +1,10 @@
+export { default as ALLIcon } from "./ALLIcon";
+export { default as BrandingIcon } from "./BrandingIcon";
+export { default as EditorialIcon } from "./EditorialIcon";
+export { default as EmailIcon } from "./EmailIcon";
+export { default as GameIcon } from "./GameIcon";
+export { default as GraphicIcon } from "./GraphicIcon";
+export { default as IllustIcon } from "./IllustIcon";
+export { default as MediaIcon } from "./MediaIcon";
+export { default as ThreeDIcon } from "./ThreeDIcon";
+export { default as UiuxIcon } from "./UiuxIcon";
