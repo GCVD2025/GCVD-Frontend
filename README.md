@@ -29,6 +29,32 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
+## GitHub Pages 배포
+
+이 프로젝트는 GitHub Pages에 자동으로 배포됩니다.
+
+### 배포 설정
+
+1. **GitHub 저장소 설정**:
+
+   - GitHub 저장소의 Settings > Pages로 이동
+   - Source를 "GitHub Actions"로 설정
+
+2. **자동 배포**:
+
+   - `main` 브랜치에 푸시하면 자동으로 배포됩니다
+   - GitHub Actions가 빌드하고 GitHub Pages에 배포합니다
+
+3. **수동 빌드**:
+   ```bash
+   yarn build
+   ```
+
+### 배포된 사이트
+
+배포가 완료되면 다음 URL에서 사이트를 확인할 수 있습니다:
+`https://[your-username].github.io/GCVD-Frontend`
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.

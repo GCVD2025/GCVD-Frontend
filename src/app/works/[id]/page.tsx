@@ -1,5 +1,3 @@
-"use client";
-
 import { use } from "react";
 import { EmailIcon, InstagramIcon } from "@/components/icons";
 import { getCategoriesByQueryKeys } from "@/utils/categories";
@@ -118,4 +116,12 @@ export default function WorkDetailPage({ params }: WorkDetailPageProps) {
       </main>
     </>
   );
+}
+
+// Why: 정적 내보내기(output: export)에서 동적 라우트는 사전 생성이 필요함
+// What: 빌드 타임에 생성할 works 상세 페이지의 id 목록을 반환
+// How: 데모 데이터 기준으로 1~15까지의 id를 정적으로 생성
+export async function generateStaticParams() {
+  const ids = Array.from({ length: 15 }, (_, i) => String(i + 1));
+  return ids.map((id) => ({ id }));
 }
