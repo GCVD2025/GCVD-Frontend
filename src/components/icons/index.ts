@@ -1,5 +1,7 @@
 export { default as ALLIcon } from "./ALLIcon";
 export { default as BrandingIcon } from "./BrandingIcon";
+export { default as CategoriesDeepGreenLeftIcon } from "./CategoriesDeepGreenLeftIcon";
+export { default as CategoriesDeepGreenRightIcon } from "./CategoriesDeepGreenRightIcon";
 export { default as EditorialIcon } from "./EditorialIcon";
 export { default as EmailIcon } from "./EmailIcon";
 export { default as GameIcon } from "./GameIcon";
