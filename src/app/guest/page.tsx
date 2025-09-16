@@ -1,77 +1,82 @@
 "use client";
 
-import { motion } from "framer-motion";
+import {
+  CategoriesDeepGreenLeftIcon,
+  CategoriesDeepGreenRightIcon,
+} from "../../components/icons";
+import CommentCard from "../../components/CommentCard";
 
+// Why: 게스트 페이지를 Designers의 서브타이틀/카드 레이아웃과 동일한 톤으로 구현
+// What: 상단 서브타이틀(초록) + 입력 박스 영역 + 댓글 카드 그리드
+// How: 재사용 가능한 아이콘/카드 토큰과 Tailwind 유틸을 그대로 활용
 export default function Guest() {
+  const comments = Array.from({ length: 8 }, (_, i) => ({
+    name: "홍길동",
+    content:
+      "임의 내용 입력 임의 내용 입력 임의 내용 입력 임의 내용 입력 임의 내용 입력 임의 내용 입력 임의 내용",
+    dateText: "2023.10.20   17:02",
+    metaRight: `댓글 ${i + 1}`,
+  }));
+
   return (
-    <div className="min-h-screen bg-[#f9f9f9]">
-      <main className="container mx-auto px-8 py-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="max-w-4xl mx-auto"
-        >
-          <h1 className="text-4xl font-bold text-gray-900 mb-8">Guest Book</h1>
+    <>
+      <img
+        src="/images/common/background-image.png"
+        alt="background"
+        className="fixed w-full h-full object-cover opacity-20"
+      />
 
-          <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-              방명록
-            </h2>
+      <main className="py-6 min-h-screen mt-18 relative">
+        {/* Why: 상단 초록 서브 타이틀은 Designers와 동일, 텍스트만 변경 */}
+        {/* What: Categories 아이콘 + 텍스트 중앙 정렬 */}
+        {/* How: 동일 컬러/타이포/정렬 규칙 적용 */}
+        <div className="flex items-center justify-center mb-6">
+          <CategoriesDeepGreenLeftIcon className="text-[#00A78E]" />
+          <span className="mx-4 text-[16px] font-extrabold text-[#00A78E]">
+            방명록을 작성해주세요!
+          </span>
+          <CategoriesDeepGreenRightIcon className="text-[#00A78E]" />
+        </div>
 
-            <div className="space-y-4">
-              {[1, 2, 3, 4, 5].map((comment) => (
-                <motion.div
-                  key={comment}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: comment * 0.1 }}
-                  className="border-l-4 border-blue-500 pl-4 py-2"
-                >
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="font-semibold text-gray-800">
-                      방문자 {comment}
-                    </span>
-                    <span className="text-sm text-gray-500">
-                      2024.01.{comment}
-                    </span>
-                  </div>
-                  <p className="text-gray-600">
-                    전시회가 정말 인상적이었습니다. 좋은 작품들을 많이 볼 수
-                    있어서 기뻤어요!
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="bg-white rounded-lg shadow-lg p-8"
-          >
-            <h3 className="text-xl font-semibold text-gray-800 mb-4">
-              방명록 작성
-            </h3>
-            <div className="space-y-4">
+        {/* 입력 영역: 두꺼운 라운드 바와 우측 전송 버튼 형태 */}
+        <section className="w-full flex items-center justify-center mb-8">
+          <div className="w-[732px] h-[96px] rounded-[16px] bg-white/70 backdrop-blur-[16px] drop-shadow-[0_0_24px_rgba(0,0,0,0.05)] px-6 py-4 flex items-center gap-4">
+            <div className="flex-1">
               <input
                 type="text"
-                placeholder="이름을 입력하세요"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="이름을 입력하세요."
+                className="w-full h-[32px] bg-transparent outline-none placeholder:text-[#20202080] text-[14px]"
               />
               <textarea
-                placeholder="방명록을 작성해주세요"
-                rows={4}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="내용을 입력하세요. 한 번 작성한 내용은 수정 및 삭제할 수 없습니다."
+                className="w-full h-[32px] mt-2 bg-transparent resize-none outline-none placeholder:text-[#20202066] text-[12px]"
               />
-              <button className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                작성하기
-              </button>
             </div>
-          </motion.div>
-        </motion.div>
+            <button
+              aria-label="submit"
+              className="w-[48px] h-[48px] rounded-full bg-[#00A78E] flex items-center justify-center text-white text-[20px]"
+            >
+              ➤
+            </button>
+          </div>
+        </section>
+
+        {/* Why: 댓글 카드는 이미지처럼 단일 열로 세로 스택 배치 */}
+        {/* What: 732px 컨테이너 폭에 맞춘 full-width 카드, 간격 24px */}
+        {/* How: flex-col 스택 구성 */}
+        <section className="w-full flex items-center justify-center">
+          <div className="w-[732px] flex flex-col gap-[24px]">
+            {comments.map((c, idx) => (
+              <CommentCard
+                key={idx}
+                name={c.name}
+                content={c.content}
+                dateText={c.dateText}
+              />
+            ))}
+          </div>
+        </section>
       </main>
-    </div>
+    </>
   );
 }
