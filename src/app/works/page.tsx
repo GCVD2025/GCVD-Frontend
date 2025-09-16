@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import FilterSidebar from "./FilterSidebar";
 import WorkCard from "../../components/WorkCard";
 
@@ -110,13 +111,15 @@ export default function Works() {
 
       <main className="py-6 flex min-h-screen mt-18 relative">
         {/* 좌측 필터 사이드바 */}
-        <FilterSidebar />
+        <Suspense fallback={null}>
+          <FilterSidebar />
+        </Suspense>
 
         {/* Why: 작품 카드들을 그리드 레이아웃으로 배치하여 일관된 간격 유지 */}
         {/* What: 3열 그리드로 작품 카드들을 배치하는 섹션 */}
         {/* How: CSS Grid를 사용하여 240px 너비의 카드들을 20px 간격으로 배치 */}
         <section className="w-full mx-auto grid [grid-template-columns:repeat(3,240px)] gap-x-[20px] gap-y-[24px] justify-center">
-          {worksData.map((work, index) => (
+          {worksData.map((work) => (
             <WorkCard
               key={work.id}
               id={work.id}
