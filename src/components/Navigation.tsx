@@ -22,9 +22,7 @@ export default function Navigation({ className = "" }: NavigationProps) {
     // Why: works 상세 페이지에서도 Works 네비게이션이 active되도록 하기 위함
     // What: 정확한 경로 매칭 또는 works 상세 페이지 경로 매칭
     // How: startsWith를 사용하여 /works로 시작하는 모든 경로를 매칭
-    const isActive =
-      pathname === targetPath ||
-      (targetPath === "/works" && pathname.startsWith("/works"));
+    const isActive = pathname.includes(targetPath);
     return `${LINK_BASE_CLASS} ${
       isActive ? ACTIVE_LINK_CLASS : INACTIVE_LINK_CLASS
     }`;
