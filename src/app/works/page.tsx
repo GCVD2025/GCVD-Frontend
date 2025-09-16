@@ -27,12 +27,72 @@ const worksData = [
     author: "홍길동",
     categories: ["branding", "illust"],
   },
+  {
+    title: "프로젝트 제목",
+    author: "홍길동",
+    categories: ["branding", "illust"],
+  },
+  {
+    title: "프로젝트 제목",
+    author: "홍길동",
+    categories: ["branding", "illust"],
+  },
+  {
+    title: "프로젝트 제목",
+    author: "홍길동",
+    categories: ["branding", "illust"],
+  },
+  {
+    title: "프로젝트 제목",
+    author: "홍길동",
+    categories: ["branding", "illust"],
+  },
+  {
+    title: "프로젝트 제목",
+    author: "홍길동",
+    categories: ["branding", "illust"],
+  },
+  {
+    title: "프로젝트 제목",
+    author: "홍길동",
+    categories: ["branding", "illust"],
+  },
+  {
+    title: "프로젝트 제목",
+    author: "홍길동",
+    categories: ["branding", "illust"],
+  },
+  {
+    title: "프로젝트 제목",
+    author: "홍길동",
+    categories: ["branding", "illust"],
+  },
+  {
+    title: "프로젝트 제목",
+    author: "홍길동",
+    categories: ["branding", "illust"],
+  },
+  {
+    title: "프로젝트 제목",
+    author: "홍길동",
+    categories: ["branding", "illust"],
+  },
+  {
+    title: "프로젝트 제목",
+    author: "홍길동",
+    categories: ["branding", "illust"],
+  },
 ];
 
 export default function Works() {
   return (
-    <div className="min-h-screen bg-[#f9f9f9]">
-      <main className="py-6 flex">
+    <>
+      <img
+        src="/images/common/background-image.png"
+        alt="background"
+        className="fixed w-full h-full object-cover opacity-20"
+      />
+      <main className="py-6 flex min-h-screen bg-[#f9f9f9]">
         {/* 좌측 필터 사이드바 */}
         <FilterSidebar />
 
@@ -50,6 +110,6 @@ export default function Works() {
           ))}
         </section>
       </main>
-    </div>
+    </>
   );
 }
