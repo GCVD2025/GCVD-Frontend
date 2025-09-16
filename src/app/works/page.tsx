@@ -1,6 +1,33 @@
 "use client";
 
 import FilterSidebar from "./FilterSidebar";
+import WorkCard from "../../components/WorkCard";
+
+// Why: 작품 데이터를 상수로 분리하여 재사용성과 유지보수성 향상
+// What: 작품 목록 데이터 정의
+// How: 배열 형태로 작품 정보들을 구조화
+const worksData = [
+  {
+    title: "프로젝트 제목",
+    author: "홍길동",
+    categories: ["branding", "illust"],
+  },
+  {
+    title: "프로젝트 제목",
+    author: "홍길동",
+    categories: ["branding", "illust"],
+  },
+  {
+    title: "프로젝트 제목",
+    author: "홍길동",
+    categories: ["branding", "illust"],
+  },
+  {
+    title: "프로젝트 제목",
+    author: "홍길동",
+    categories: ["branding", "illust"],
+  },
+];
 
 export default function Works() {
   return (
@@ -9,30 +36,18 @@ export default function Works() {
         {/* 좌측 필터 사이드바 */}
         <FilterSidebar />
 
-        {/* Why: 제공된 시안에 맞는 단일 마크업만 남기기 위함 */}
-        {/* What: 240x308, radius 12, 흰색 그라데이션(80%→40%), 그림자 blur 24, 배경 블러 16 */}
-        {/* How: grid 3열 레이아웃 + Tailwind 임의 값 클래스로 gradient/shadow/backdrop-blur 지정 */}
+        {/* Why: 작품 카드들을 그리드 레이아웃으로 배치하여 일관된 간격 유지 */}
+        {/* What: 3열 그리드로 작품 카드들을 배치하는 섹션 */}
+        {/* How: CSS Grid를 사용하여 240px 너비의 카드들을 20px 간격으로 배치 */}
         <section className="w-full absolute left-[50%] translate-x-[-50%] mx-auto grid [grid-template-columns:repeat(3,240px)] gap-x-[20px] gap-y-[24px] justify-center">
-          <div
-            className="w-[240px] h-[308px] rounded-[12px] 
-            bg-[linear-gradient(180deg,rgba(255,255,255,0.8)_0%,rgba(255,255,255,0.4)_100%)]
-            shadow-[0_0_24px_rgba(0,0,0,0.05)] backdrop-blur-[16px]"
-          />
-          <div
-            className="w-[240px] h-[308px] rounded-[12px] 
-            bg-[linear-gradient(180deg,rgba(255,255,255,0.8)_0%,rgba(255,255,255,0.4)_100%)]
-            shadow-[0_0_24px_rgba(0,0,0,0.05)] backdrop-blur-[16px]"
-          />
-          <div
-            className="w-[240px] h-[308px] rounded-[12px] 
-            bg-[linear-gradient(180deg,rgba(255,255,255,0.8)_0%,rgba(255,255,255,0.4)_100%)]
-            shadow-[0_0_24px_rgba(0,0,0,0.05)] backdrop-blur-[16px]"
-          />
-          <div
-            className="w-[240px] h-[308px] rounded-[12px] 
-            bg-[linear-gradient(180deg,rgba(255,255,255,0.8)_0%,rgba(255,255,255,0.4)_100%)]
-            shadow-[0_0_24px_rgba(0,0,0,0.05)] backdrop-blur-[16px]"
-          />
+          {worksData.map((work, index) => (
+            <WorkCard
+              key={index}
+              title={work.title}
+              author={work.author}
+              categories={work.categories}
+            />
+          ))}
         </section>
       </main>
     </div>
