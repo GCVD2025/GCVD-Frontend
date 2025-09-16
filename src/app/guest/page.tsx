@@ -27,10 +27,10 @@ export default function Guest() {
       />
 
       <main className="py-6 min-h-screen mt-18 relative">
-        {/* Why: 상단 초록 서브 타이틀은 Designers와 동일, 텍스트만 변경 */}
-        {/* What: Categories 아이콘 + 텍스트 중앙 정렬 */}
-        {/* How: 동일 컬러/타이포/정렬 규칙 적용 */}
-        <div className="flex items-center justify-center mb-6">
+        {/* Why: 서브타이틀도 입력 섹션과 함께 고정되어야 함 */}
+        {/* What: sticky 컨테이너 안쪽에서 서브타이틀 렌더 */}
+        {/* How: 아래 입력 섹션과 동일 컨테이너에 포함 */}
+        <div className="sticky top-24 z-40 flex items-center justify-center mb-6">
           <CategoriesDeepGreenLeftIcon className="text-[#00A78E]" />
           <span className="mx-4 text-[16px] font-extrabold text-[#00A78E]">
             방명록을 작성해주세요!
@@ -38,8 +38,8 @@ export default function Guest() {
           <CategoriesDeepGreenRightIcon className="text-[#00A78E]" />
         </div>
 
-        {/* 입력 영역: 두꺼운 라운드 바와 우측 전송 버튼 형태 */}
-        <section className="w-full flex items-center justify-center mb-8 shadow-[inset_0_0_24px_0_rgba(255,255,255,0.7)] ">
+        {/* 입력 영역: 네비게이션과 함께 스크롤되어도 상단에 고정 */}
+        <section className="sticky top-36 z-40 w-full flex items-center justify-center mb-8 ">
           <div className="w-[764px] h-[152px] rounded-[16px] bg-white/60 backdrop-blur-[24px] drop-shadow-[0_0_24px_rgba(0,0,0,0.05)] p-4 flex items-end border-[1.5px] border-[#00A78E]/30">
             <div className="flex-1 flex flex-col gap-2">
               <input
