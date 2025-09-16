@@ -1,6 +1,6 @@
 "use client";
 
-import { EmailIcon } from "@/components/icons";
+import { EmailIcon, InstagramIcon } from "@/components/icons";
 import { getCategoriesByQueryKeys } from "@/utils/categories";
 
 // Why: 작품 상세 페이지의 props 타입 정의
@@ -81,7 +81,7 @@ export default function WorkDetailPage({ params }: WorkDetailPageProps) {
                 <span>{workData.email}</span>
               </div>
               <div className="flex items-center gap-1 text-[9px] text-[#20202080]">
-                <span>📷</span>
+                <InstagramIcon size={9} />
                 <span>{workData.instagram}</span>
               </div>
             </div>

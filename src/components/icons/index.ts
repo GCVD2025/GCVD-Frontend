@@ -7,6 +7,7 @@ export { default as EmailIcon } from "./EmailIcon";
 export { default as GameIcon } from "./GameIcon";
 export { default as GraphicIcon } from "./GraphicIcon";
 export { default as IllustIcon } from "./IllustIcon";
+export { default as InstagramIcon } from "./InstagramIcon";
 export { default as MediaIcon } from "./MediaIcon";
 export { default as ThreeDIcon } from "./ThreeDIcon";
 export { default as UiuxIcon } from "./UiuxIcon";
