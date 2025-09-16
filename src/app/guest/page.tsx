@@ -39,24 +39,25 @@ export default function Guest() {
         </div>
 
         {/* 입력 영역: 두꺼운 라운드 바와 우측 전송 버튼 형태 */}
-        <section className="w-full flex items-center justify-center mb-8">
-          <div className="w-[732px] h-[96px] rounded-[16px] bg-white/70 backdrop-blur-[16px] drop-shadow-[0_0_24px_rgba(0,0,0,0.05)] px-6 py-4 flex items-center gap-4">
-            <div className="flex-1">
+        <section className="w-full flex items-center justify-center mb-8 shadow-[inset_0_0_24px_0_rgba(255,255,255,0.7)] ">
+          <div className="w-[764px] h-[152px] rounded-[16px] bg-white/60 backdrop-blur-[24px] drop-shadow-[0_0_24px_rgba(0,0,0,0.05)] p-4 flex items-end border-[1.5px] border-[#00A78E]/30">
+            <div className="flex-1 flex flex-col gap-2">
               <input
                 type="text"
                 placeholder="이름을 입력하세요."
-                className="w-full h-[32px] bg-transparent outline-none placeholder:text-[#20202080] text-[14px]"
+                className="w-full p-3 outline-none placeholder:text-[#20202066] text-[14px] rounded-[8px] text-semibold bg-[linear-gradient(90deg,rgba(0,0,0,0.03),rgba(0,0,0,0.01))]"
               />
               <textarea
                 placeholder="내용을 입력하세요. 한 번 작성한 내용은 수정 및 삭제할 수 없습니다."
-                className="w-full h-[32px] mt-2 bg-transparent resize-none outline-none placeholder:text-[#20202066] text-[12px]"
+                className="w-full p-3 resize-none outline-none placeholder:text-[#20202066] rounded-[8px] text-[12px] bg-[linear-gradient(90deg,rgba(0,0,0,0.013),rgba(0,0,0,0.009))]"
               />
             </div>
-            <button
-              aria-label="submit"
-              className="w-[48px] h-[48px] rounded-full bg-[#00A78E] flex items-center justify-center text-white text-[20px]"
-            >
-              ➤
+            <button aria-label="submit">
+              <img
+                src="/images/common/send_button.png"
+                alt="send"
+                className="w-[60px] h-[60px]"
+              />
             </button>
           </div>
         </section>
