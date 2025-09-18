@@ -5,6 +5,7 @@ import {
   CategoriesDeepGreenRightIcon,
 } from "../../components/icons";
 import CommentCard from "../../components/CommentCard";
+import { BlurOverlay } from "@/components";
 
 // Why: 게스트 페이지를 Designers의 서브타이틀/카드 레이아웃과 동일한 톤으로 구현
 // What: 상단 서브타이틀(초록) + 입력 박스 영역 + 댓글 카드 그리드
@@ -30,7 +31,7 @@ export default function Guest() {
         {/* Why: 서브타이틀도 입력 섹션과 함께 고정되어야 함 */}
         {/* What: sticky 컨테이너 안쪽에서 서브타이틀 렌더 */}
         {/* How: 아래 입력 섹션과 동일 컨테이너에 포함 */}
-        <div className="sticky top-24 z-40 flex items-center justify-center mb-6">
+        <div className="sticky top-24 z-100 flex items-center justify-center mb-6">
           <CategoriesDeepGreenLeftIcon className="text-[#00A78E]" />
           <span className="mx-4 text-[16px] font-extrabold text-[#00A78E]">
             방명록을 작성해주세요!
@@ -39,8 +40,16 @@ export default function Guest() {
         </div>
 
         {/* 입력 영역: 네비게이션과 함께 스크롤되어도 상단에 고정 */}
-        <section className="sticky top-36 z-40 w-full flex items-center justify-center mb-8 ">
-          <div className="w-[764px] h-[152px] rounded-[16px] bg-white/60 backdrop-blur-[24px] drop-shadow-[0_0_24px_rgba(0,0,0,0.05)] p-4 flex items-end border-[1.5px] border-[#00A78E]/30">
+        <section className="sticky top-36 z-40 w-full flex items-center justify-center mb-8 relative">
+          {/* Why: 하나의 오버레이로 섀도우+그라디언트+상단 블러를 모두 처리 */}
+          {/* What: 뷰포트 상단(-96px)부터 현재 섹션 하단까지 덮는 단일 레이어 */}
+          {/* How: absolute top-[-96px] + h-[calc(100%+96px)] + w-screen */}
+          {/* <div className="pointer-events-none h-80 fixed top-0 w-screen -z-10 bg-[linear-gradient(0deg,rgba(249,249,249,0.20)_0%,rgba(255, 255, 255, 0)_100%)] backdrop-blur-[12px]"></div> */}
+          <BlurOverlay
+            blurRadius={12}
+            className="fixed top-0 left-0 w-screen h-80 -z-10"
+          />
+          <div className="w-[764px] h-[152px] rounded-[16px] bg-white/60 backdrop-blur-[24px] drop-shadow-[0_0_24px_rgba(0,0,0,0.05)] p-4 flex items-end border-[1.5px] border-[#00A78E]/30 opacity-80">
             <div className="flex-1 flex flex-col gap-2">
               <input
                 type="text"
