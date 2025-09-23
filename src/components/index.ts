@@ -6,3 +6,4 @@ export { default as Navigation } from "./Navigation";
 export { default as WorkCard } from "./WorkCard";
 export { default as DesignerCard } from "./DesignerCard";
 export { default as CommentCard } from "./CommentCard";
+export { default as Footer } from "./Footer";
