@@ -24,7 +24,7 @@ export default function DesignerCard({ designer }: DesignerCardProps) {
       {/* How: img 태그를 사용하여 크기만 설정하고, group hover로 오버레이 효과 구현 */}
       <div className="p-4 cursor-pointer relative">
         <img
-          src={`images/designers/${designer_profile_image}`}
+          src={`/images/designers/${designer_profile_image}`}
           alt={designer_name}
           className="w-full h-45 object-cover rounded-[10px_10px_10px_10px] "
         />

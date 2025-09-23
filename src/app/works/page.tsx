@@ -104,7 +104,7 @@ export default function Works() {
   return (
     <>
       <img
-        src="images/common/background-image.png"
+        src="/images/common/background-image.png"
         alt="background"
         className="fixed w-full h-full object-cover opacity-20"
       />

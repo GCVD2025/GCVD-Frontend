@@ -22,7 +22,7 @@ export default function Guest() {
   return (
     <>
       <img
-        src="images/common/background-image.png"
+        src="/images/common/background-image.png"
         alt="background"
         className="fixed w-full h-full object-cover opacity-20"
       />
@@ -63,7 +63,7 @@ export default function Guest() {
             </div>
             <button aria-label="submit">
               <img
-                src="images/common/send_button.png"
+                src="/images/common/send_button.png"
                 alt="send"
                 className="w-[60px] h-[60px]"
               />
