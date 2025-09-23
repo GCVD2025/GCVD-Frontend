@@ -1,6 +1,7 @@
 import { use } from "react";
 import { EmailIcon, InstagramIcon } from "@/components/icons";
 import { getCategoriesByQueryKeys } from "@/utils/categories";
+import { getImageSrc } from "../../../utils/getImageSrc";
 
 // Why: 작품 상세 페이지의 props 타입 정의
 // What: URL 파라미터로부터 받는 작품 ID 타입
@@ -38,7 +39,7 @@ export default function WorkDetailPage({ params }: WorkDetailPageProps) {
   return (
     <>
       <img
-        src="/images/common/background-image.png"
+        src={getImageSrc("/images/common/background-image.png")}
         alt="background"
         className="fixed w-full h-full object-cover opacity-20"
       />
@@ -103,12 +104,12 @@ export default function WorkDetailPage({ params }: WorkDetailPageProps) {
         {/* How: img 태그를 사용하여 이미지 표시 */}
         <section className="w-full mx-auto flex flex-col items-center justify-center gap-4 ml-72 mr-[51px]">
           <img
-            src="/images/works/detail/detail_sample1.png"
+            src={getImageSrc("/images/works/detail/detail_sample1.png")}
             alt={`작품 ${id}`}
             className="max-w-full object-contain rounded-lg shadow-lg"
           />
           <img
-            src="/images/works/detail/detail-sample2.png"
+            src={getImageSrc("/images/works/detail/detail-sample2.png")}
             alt={`작품 ${id}`}
             className="max-w-full  object-contain rounded-lg shadow-lg"
           />

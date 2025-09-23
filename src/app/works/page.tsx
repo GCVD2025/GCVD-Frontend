@@ -3,6 +3,7 @@
 import { Suspense } from "react";
 import FilterSidebar from "./FilterSidebar";
 import WorkCard from "../../components/WorkCard";
+import { getImageSrc } from "../../utils/getImageSrc";
 
 // Why: 작품 데이터를 상수로 분리하여 재사용성과 유지보수성 향상
 // What: 작품 목록 데이터 정의
@@ -104,7 +105,7 @@ export default function Works() {
   return (
     <>
       <img
-        src="/images/common/background-image.png"
+        src={getImageSrc("/images/common/background-image.png")}
         alt="background"
         className="fixed w-full h-full object-cover opacity-20"
       />

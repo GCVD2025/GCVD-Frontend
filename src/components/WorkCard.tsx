@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { getCategoriesByQueryKeys } from "@/utils/categories";
+import { getImageSrc } from "../utils/getImageSrc";
 
 interface WorkCardProps {
   id: string;
@@ -25,7 +26,7 @@ export default function WorkCard({
       <div className="backdrop-blur-[16px] w-[240px] h-[308px] rounded-[12px] bg-gradient(180deg, rgb(255, 255, 255) 80%, rgb(255, 255, 255) 40%) shadow-[0_0_24px_rgba(0,0,0,0.05)] overflow-hidden cursor-pointer hover:shadow-[0_0_32px_rgba(0,0,0,0.1)] transition-shadow duration-300">
         <div className="w-full h-[192px]">
           <img
-            src={imageUrl || "/images/works/sample.png"}
+            src={getImageSrc(imageUrl || "/images/works/sample.png")}
             alt={title}
             className="w-full h-full object-cover rounded-[0_0_12px_12px]"
           />

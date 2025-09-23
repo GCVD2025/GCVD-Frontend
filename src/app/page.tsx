@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { AnimatedCard, FadeInText, AnimatedButton } from "@/components";
+import { getImageSrc } from "../utils/getImageSrc";
 
 export default function Home() {
   return (
@@ -152,7 +153,7 @@ export default function Home() {
         >
           <Image
             aria-hidden
-            src="/file.svg"
+            src={getImageSrc("/file.svg")}
             alt="File icon"
             width={16}
             height={16}

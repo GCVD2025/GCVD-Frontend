@@ -6,6 +6,7 @@ import {
 } from "../../components/icons";
 import CommentCard from "../../components/CommentCard";
 import { BlurOverlay } from "@/components";
+import { getImageSrc } from "../../utils/getImageSrc";
 
 // Why: 게스트 페이지를 Designers의 서브타이틀/카드 레이아웃과 동일한 톤으로 구현
 // What: 상단 서브타이틀(초록) + 입력 박스 영역 + 댓글 카드 그리드
@@ -22,7 +23,7 @@ export default function Guest() {
   return (
     <>
       <img
-        src="/images/common/background-image.png"
+        src={getImageSrc("/images/common/background-image.png")}
         alt="background"
         className="fixed w-full h-full object-cover opacity-20"
       />
@@ -63,7 +64,7 @@ export default function Guest() {
             </div>
             <button aria-label="submit">
               <img
-                src="/images/common/send_button.png"
+                src={getImageSrc("/images/common/send_button.png")}
                 alt="send"
                 className="w-[60px] h-[60px]"
               />
