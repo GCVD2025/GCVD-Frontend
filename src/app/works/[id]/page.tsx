@@ -38,7 +38,7 @@ export default function WorkDetailPage({ params }: WorkDetailPageProps) {
   return (
     <>
       <img
-        src="/images/common/background-image.png"
+        src="images/common/background-image.png"
         alt="background"
         className="fixed w-full h-full object-cover opacity-20"
       />
@@ -103,12 +103,12 @@ export default function WorkDetailPage({ params }: WorkDetailPageProps) {
         {/* How: img 태그를 사용하여 이미지 표시 */}
         <section className="w-full mx-auto flex flex-col items-center justify-center gap-4 ml-72 mr-[51px]">
           <img
-            src="/images/works/detail/detail_sample1.png"
+            src="images/works/detail/detail_sample1.png"
             alt={`작품 ${id}`}
             className="max-w-full object-contain rounded-lg shadow-lg"
           />
           <img
-            src="/images/works/detail/detail-sample2.png"
+            src="images/works/detail/detail-sample2.png"
             alt={`작품 ${id}`}
             className="max-w-full  object-contain rounded-lg shadow-lg"
           />
