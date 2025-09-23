@@ -1,4 +1,4 @@
-import { useScroll } from "framer-motion";
+import { useScroll, useTransform, motion } from "framer-motion";
 import PerCharText from "./PerCharText";
 import { useRef } from "react";
 
@@ -9,7 +9,46 @@ const AboutSection = () => {
     offset: ["start start", "end end"],
   });
 
-  console.log(scrollYProgress);
+  // Why: 각 이미지가 서로 다른 시점(0.4/0.5/0.6)에 서서히 나타나도록 연출
+  // What: scrollYProgress 구간을 opacity 0→1로 매핑 (0.1 구간 동안 페이드인)
+  // How: useTransform으로 [T, T+0.1] → [0, 1] 매핑, 필요 시 구간 폭(FADE_WINDOW)을 조정
+  const FADE_WINDOW = 0.1;
+  const confettiStart = 0.4;
+  const greenStart = 0.2;
+  const handStart = 0.05;
+  const confettiOpacity = useTransform(
+    scrollYProgress,
+    [confettiStart, confettiStart + FADE_WINDOW],
+    [0, 1]
+  );
+  const greenOpacity = useTransform(
+    scrollYProgress,
+    [greenStart, greenStart + FADE_WINDOW],
+    [0, 1]
+  );
+  const handOpacity = useTransform(
+    scrollYProgress,
+    [handStart, handStart + FADE_WINDOW],
+    [0, 1]
+  );
+
+  // Why: 원래 CSS translate-y 위치로 수렴하도록 아래→위 슬라이드
+  // What: 각 이미지 시점에서 y를 20%→0%로 보간 (CSS 클래스는 수정하지 않음)
+  const confettiY = useTransform(
+    scrollYProgress,
+    [confettiStart, confettiStart + FADE_WINDOW],
+    ["20%", "0%"]
+  );
+  const greenY = useTransform(
+    scrollYProgress,
+    [greenStart, greenStart + FADE_WINDOW],
+    ["20%", "0%"]
+  );
+  const handY = useTransform(
+    scrollYProgress,
+    [handStart, handStart + FADE_WINDOW],
+    ["20%", "0%"]
+  );
 
   return (
     <section ref={sectionRef} className="h-[400vh] text-center my-100">
@@ -28,33 +67,26 @@ const AboutSection = () => {
           />
         </div>
 
-        <img
+        <motion.img
           className="absolute translate-y-[-20%] z-0"
+          style={{ opacity: confettiOpacity, y: confettiY }}
           src="/images/about/about_section_confetti.png"
           alt="confetti"
         />
 
-        <img
+        <motion.img
           className="absolute translate-y-[100%] z-0"
+          style={{ opacity: greenOpacity, y: greenY }}
           src="/images/about/about_section_green_light.png"
           alt="green light"
         />
-        <img
+        <motion.img
           className="absolute translate-y-[68%] z-0"
+          style={{ opacity: handOpacity, y: handY }}
           src="/images/about/about_section_hand.png"
           alt="hand"
         />
       </div>
-      {/*
-        Why: 세 개의 이미지를 섹션 스크롤 동안 하단에 고정하고, 서로 겹쳐 하나의 레이어처럼 보이게 하기 위함
-        What: 바깥 래퍼는 sticky(bottom:0)로 섹션 내에서만 고정, 내부를 relative로 두고 각 이미지는 absolute bottom-0 중앙 정렬로 겹침
-        How: sticky bottom-0 z-10(pointer-events-none) + 내부 relative 컨테이너 + 각 img에 absolute bottom-0 left-1/2 -translate-x-1/2 적용
-      */}
-      {/*
-        Why: 하단 이미지를 섹션 범위 내에서만 뷰포트 하단에 고정하고, 서로 겹친 상태로 유지하기 위함
-        What: sticky(bottom:0) + h-screen로 하단 기준을 고정, 내부 relative h-full에서 각 이미지를 absolute bottom-0로 중앙 정렬해 겹침
-        How: 래퍼에 sticky bottom-0 z-10 pointer-events-none h-screen, 내부에 relative w-full h-full, 각 img에 absolute bottom-0 left-1/2 -translate-x-1/2 적용
-      */}
     </section>
   );
 };
