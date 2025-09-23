@@ -2,12 +2,15 @@
 
 import { PartnersCarousel } from "@/components";
 import AboutSection from "@/components/AboutSection";
+import AboutSection2 from "@/components/AboutSection2";
 
 export default function About() {
   return (
     <div className="min-h-screen bg-[#f9f9f9]">
       <main className="container mx-auto px-8 py-8">
         <AboutSection />
+
+        <AboutSection2 />
 
         {/* 파트너스 캐러셀 */}
         <PartnersCarousel />
