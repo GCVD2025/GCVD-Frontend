@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "build": "next build --turbopack && node scripts/fix-image-paths.js",
     "start": "npx serve@latest out -l 3000",
     "lint": "eslint",
     "deploy": "yarn build && touch out/.nojekyll"

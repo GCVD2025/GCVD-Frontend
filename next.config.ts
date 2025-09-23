@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
   // What: 환경변수로 베이스 경로를 주입하여 유연하게 설정
   // How: 로컬은 빈 문자열, CI(GitHub Actions)에서는 "/GCVD-Frontend"로 설정
   basePath: process.env.NEXT_PUBLIC_BASE_PATH ?? "",
-  assetPrefix: process.env.NODE_ENV === "production" ? "/GCVD-Frontend" : "",
+  assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH ?? "",
 };
 
 export default nextConfig;
