@@ -1,12 +1,14 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { PartnersCarousel } from "@/components";
+import AboutSection from "@/components/AboutSection";
 
 export default function About() {
   return (
     <div className="min-h-screen bg-[#f9f9f9]">
       <main className="container mx-auto px-8 py-8">
+        <AboutSection />
+
         {/* 파트너스 캐러셀 */}
         <PartnersCarousel />
 
