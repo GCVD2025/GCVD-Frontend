@@ -13,7 +13,23 @@ export default function About() {
         <AboutSection />
 
         <AboutSection2 />
+      </main>
 
+      {/* Why: thirdcard.mp4 비디오로 화면을 꽉 채우는 섹션 */}
+      {/* What: 전체 화면 크기의 비디오 배경으로 시각적 임팩트 제공 */}
+      {/* How: 컨테이너 밖에 배치하여 전체 화면을 채움 */}
+      <section className="w-screen h-screen mb-38 relative overflow-hidden">
+        <video
+          className="w-full h-full object-cover absolute inset-0"
+          src="/images/about/thirdcard.mp4"
+          autoPlay
+          muted
+          playsInline
+          loop
+        />
+      </section>
+
+      <main className="container mx-auto px-8 py-8">
         {/* 파트너스 캐러셀 */}
         <PartnersCarousel />
 

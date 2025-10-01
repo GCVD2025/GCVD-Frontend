@@ -162,7 +162,7 @@ const AboutSection2 = () => {
   ]);
 
   return (
-    <section ref={sectionRef} className="h-[400vh] text-center my-400">
+    <section ref={sectionRef} className="h-[400vh] text-center mt-400 mb-100">
       <div className="sticky top-[50%] translate-y-[-50%] flex flex-col justify-center items-center">
         <div className="z-10">
           <PerCharText
