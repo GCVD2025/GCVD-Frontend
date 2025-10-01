@@ -4,8 +4,6 @@
 // What: 좌-중-우 3열 고정 레이아웃(1280px 이상만 지원). 중앙은 단순한 흰색 카드 박스, 좌측은 제공된 3개 이미지 배치, 우측은 기간/운영 시간/전시장소 텍스트.
 // How: Tailwind로 고정 폭 컨테이너와 컬럼 간격을 구성. 표준 <img>만 사용(next/image 금지 규칙 준수). 타이포는 14px/20px과 #202020 적용.
 
-const TEXT_COLOR = "#202020"; // 전역 타이포 색상(디자인 스펙: #202020)
-
 import { useState, useEffect, useRef } from "react";
 
 const HeroSection = () => {
@@ -70,10 +68,9 @@ const HeroSection = () => {
               />
               {/* 학교/전시 문구 */}
               <figcaption
-                className={`text-[14px] leading-5 text-right opacity-0 ${
+                className={`text-[14px] leading-5 text-right text-[#202020] opacity-0 ${
                   reveal ? "slide-in-left delay-3_6s" : ""
                 }`}
-                style={{ color: TEXT_COLOR }}
               >
                 <p className="mb-1">2025 가천대학교 시각디자인학과</p>
                 <p>40회 졸업전시</p>
@@ -99,10 +96,7 @@ const HeroSection = () => {
               className="h-full w-full mt-[80%] mr-13 ml-3"
               aria-label="전시 정보"
             >
-              <dl
-                className="space-y-12 text-[14px] leading-5"
-                style={{ color: TEXT_COLOR }}
-              >
+              <dl className="space-y-12 text-[14px] leading-5 text-[#202020]">
                 <div
                   className={`opacity-0 ${
                     reveal ? "slide-in-right delay-4_4s" : ""
