@@ -3,11 +3,13 @@
 import { PartnersCarousel } from "@/components";
 import AboutSection from "@/components/AboutSection";
 import AboutSection2 from "@/components/AboutSection2";
+import HeroSection from "@/components/HeroSection";
 
 export default function About() {
   return (
     <div className="min-h-screen bg-[#f9f9f9]">
       <main className="container mx-auto px-8 py-8">
+        <HeroSection />
         <AboutSection />
 
         <AboutSection2 />

@@ -1,0 +1,94 @@
+// Why: About 페이지 첫 화면에서 전시 브랜딩(좌측 이미지), 핵심 비주얼(중앙 카드), 정보(우측 텍스트)를 동시에 전달해 의도와 맥락을 명확히 보여주기 위함.
+// What: 좌-중-우 3열 고정 레이아웃(1280px 이상만 지원). 중앙은 단순한 흰색 카드 박스, 좌측은 제공된 3개 이미지 배치, 우측은 기간/운영 시간/전시장소 텍스트.
+// How: Tailwind로 고정 폭 컨테이너와 컬럼 간격을 구성. 표준 <img>만 사용(next/image 금지 규칙 준수). 타이포는 14px/20px과 #202020 적용.
+
+const TEXT_COLOR = "#202020"; // 전역 타이포 색상(디자인 스펙: #202020)
+const CARD_WIDTH_PX = 520; // 중앙 카드 고정 폭 (디자인 참조용, 필요 시 조정)
+const CARD_HEIGHT_PX = 720; // 중앙 카드 고정 높이
+
+const HeroSection = () => {
+  return (
+    <section className=" w-full min-h-[1200px]">
+      {/* 배경 이미지: 섹션 전체에 깔림 */}
+      <div className="absolute inset-0 ">
+        <img
+          src="/images/about/hero_section_background.png"
+          alt="About 섹션 배경 그래픽"
+          className="w-full object-cover opacity-75"
+        />
+      </div>
+      {/* 고정 컨테이너: 3열 레이아웃 */}
+      <div className="relative z-10 mx-auto max-w-[1200px] px-0 py-14">
+        <div className="mx-auto flex justify-center gap-9">
+          {/* 좌측: 브랜딩 이미지 묶음 */}
+          <figure
+            className="shrink-0 h-full ml-auto mt-[20%]"
+            aria-label="전시 브랜딩"
+          >
+            {/* 로고 */}
+            <img
+              src="/images/about/hero_section_Jubilee.png"
+              alt="Jubilee 로고"
+              className="block w-[200px] h-auto mb-5"
+            />
+            {/* 서브 타이틀 */}
+            <img
+              src="/images/about/hero_section_sub_title_everything.png"
+              alt="everything all at once 서브 타이틀"
+              className="block w-[220px] h-auto mb-13 "
+            />
+            {/* 학교/전시 문구 */}
+            <figcaption
+              className="text-[14px] leading-5 text-right"
+              style={{ color: TEXT_COLOR }}
+            >
+              <p className="mb-1">2025 가천대학교 시각디자인학과</p>
+              <p>40회 졸업전시</p>
+            </figcaption>
+          </figure>
+
+          {/* 중앙: 단순 흰색 카드 */}
+
+          <video
+            className="w-[40%] h-[60%] rounded-[16px]"
+            src="/images/about/hero_section_video.mp4"
+            autoPlay
+            muted
+            playsInline
+          />
+
+          {/* 우측: 전시 정보 텍스트 */}
+          <aside className="w-[320px] mt-[20%]" aria-label="전시 정보">
+            <dl
+              className="space-y-12 text-[14px] leading-5"
+              style={{ color: TEXT_COLOR }}
+            >
+              <div>
+                <dt className="mb-3 text-[#7A7A7A]">기간</dt>
+                <dd>
+                  <p>2025. 10. 20. - 2025. 10. 28.</p>
+                </dd>
+              </div>
+              <div>
+                <dt className="mb-3 text-[#7A7A7A]">운영 시간</dt>
+                <dd>
+                  <p>월-금: 10AM - 8PM</p>
+                  <p>토-일: 10AM - 6PM</p>
+                </dd>
+              </div>
+              <div>
+                <dt className="mb-3 text-[#7A7A7A]">전시 장소</dt>
+                <dd>
+                  <p>경기도 성남시 수정구 성남대로 1342</p>
+                  <p>가천대학교 비전타워 B1</p>
+                </dd>
+              </div>
+            </dl>
+          </aside>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default HeroSection;
