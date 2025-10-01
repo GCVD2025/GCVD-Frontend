@@ -40,7 +40,7 @@ const HeroSection = () => {
         <img
           src="/images/about/hero_section_background.png"
           alt="About 섹션 배경 그래픽"
-          className="w-full object-cover opacity-75"
+          className="w-full object-cover opacity-0 fade-in-up-background delay-1s"
         />
       </div>
       {/* 고정 컨테이너: 3열 레이아웃 */}
@@ -64,13 +64,13 @@ const HeroSection = () => {
               src="/images/about/hero_section_sub_title_everything.png"
               alt="everything all at once 서브 타이틀"
               className={`block w-[220px] h-auto mb-13 opacity-0 ${
-                reveal ? "slide-in-left delay-3_3s" : ""
+                reveal ? "slide-in-left delay-3_4s" : ""
               }`}
             />
             {/* 학교/전시 문구 */}
             <figcaption
               className={`text-[14px] leading-5 text-right opacity-0 ${
-                reveal ? "slide-in-left delay-3_4s" : ""
+                reveal ? "slide-in-left delay-3_6s" : ""
               }`}
               style={{ color: TEXT_COLOR }}
             >
@@ -82,7 +82,7 @@ const HeroSection = () => {
           {/* 중앙: 단순 흰색 카드 */}
 
           <video
-            className="w-[40%] h-[60%] rounded-[16px]"
+            className="w-[40%] h-[60%] rounded-[16px] opacity-0 fade-in-up-video delay-0_5s"
             src="/images/about/hero_section_video.mp4"
             autoPlay
             muted
@@ -99,7 +99,7 @@ const HeroSection = () => {
             >
               <div
                 className={`opacity-0 ${
-                  reveal ? "slide-in-right delay-3_6s" : ""
+                  reveal ? "slide-in-right delay-4_4s" : ""
                 }`}
               >
                 <dt className="mb-3 text-[#7A7A7A]">기간</dt>
@@ -109,7 +109,7 @@ const HeroSection = () => {
               </div>
               <div
                 className={`opacity-0 ${
-                  reveal ? "slide-in-right delay-3_7s" : ""
+                  reveal ? "slide-in-right delay-4_6s" : ""
                 }`}
               >
                 <dt className="mb-3 text-[#7A7A7A]">운영 시간</dt>
@@ -120,7 +120,7 @@ const HeroSection = () => {
               </div>
               <div
                 className={`opacity-0 ${
-                  reveal ? "slide-in-right delay-3_8s" : ""
+                  reveal ? "slide-in-right delay-4_8s" : ""
                 }`}
               >
                 <dt className="mb-3 text-[#7A7A7A]">전시 장소</dt>

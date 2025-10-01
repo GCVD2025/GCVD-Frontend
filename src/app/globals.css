@@ -34,7 +34,7 @@ How: keyframes + 유틸리티 클래스(.slide-in-left, .slide-in-right). forwar
 @keyframes slideInLeft {
   from {
     opacity: 0;
-    transform: translateX(-24px);
+    transform: translateX(-48px);
   }
   to {
     opacity: 1;
@@ -45,7 +45,7 @@ How: keyframes + 유틸리티 클래스(.slide-in-left, .slide-in-right). forwar
 @keyframes slideInRight {
   from {
     opacity: 0;
-    transform: translateX(24px);
+    transform: translateX(48px);
   }
   to {
     opacity: 1;
@@ -58,6 +58,45 @@ How: keyframes + 유틸리티 클래스(.slide-in-left, .slide-in-right). forwar
 }
 .slide-in-right {
   animation: slideInRight 700ms ease-out forwards;
+}
+
+/* 페이드인 업 애니메이션 */
+@keyframes fadeInUpVideo {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 페이드인 업 애니메이션 */
+@keyframes fadeInUpBackground {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 0.75;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up-background {
+  animation: fadeInUpBackground 1500ms ease-out forwards;
+}
+
+.fade-in-up-video {
+  animation: fadeInUpVideo 1500ms ease-out forwards;
+}
+
+.delay-0_5s {
+  animation-delay: 500ms;
+}
+.delay-1s {
+  animation-delay: 1000ms;
 }
 
 /* 애니메이션 지연 유틸 */
@@ -85,4 +124,22 @@ How: keyframes + 유틸리티 클래스(.slide-in-left, .slide-in-right). forwar
 }
 .delay-3_8s {
   animation-delay: 3.8s;
+}
+.delay-3_9s {
+  animation-delay: 3.9s;
+}
+.delay-4s {
+  animation-delay: 4s;
+}
+.delay-4_2s {
+  animation-delay: 4.2s;
+}
+.delay-4_4s {
+  animation-delay: 4.4s;
+}
+.delay-4_6s {
+  animation-delay: 4.6s;
+}
+.delay-4_8s {
+  animation-delay: 4.8s;
 }
