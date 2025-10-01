@@ -45,44 +45,46 @@ const HeroSection = () => {
       </div>
       {/* 고정 컨테이너: 3열 레이아웃 */}
       <div className="relative z-10 mx-auto max-w-[1200px] px-0 py-14">
-        <div className="mx-auto flex justify-center gap-9">
+        <div className="mx-auto flex justify-center items-stretch gap-9 h-[720px]">
           {/* 좌측: 브랜딩 이미지 묶음 */}
-          <figure
-            className="shrink-0 h-full ml-auto mt-[20%]"
-            aria-label="전시 브랜딩"
-          >
-            {/* 로고 */}
-            <img
-              src="/images/about/hero_section_Jubilee.png"
-              alt="Jubilee 로고"
-              className={`block w-[200px] h-auto mb-5 opacity-0 ${
-                reveal ? "slide-in-left delay-3_2s" : ""
-              }`}
-            />
-            {/* 서브 타이틀 */}
-            <img
-              src="/images/about/hero_section_sub_title_everything.png"
-              alt="everything all at once 서브 타이틀"
-              className={`block w-[220px] h-auto mb-13 opacity-0 ${
-                reveal ? "slide-in-left delay-3_4s" : ""
-              }`}
-            />
-            {/* 학교/전시 문구 */}
-            <figcaption
-              className={`text-[14px] leading-5 text-right opacity-0 ${
-                reveal ? "slide-in-left delay-3_6s" : ""
-              }`}
-              style={{ color: TEXT_COLOR }}
+          <div className="shrink-0 h-full ml-auto radial-right">
+            <figure
+              className="h-full mt-[80%] ml-13 mr-3"
+              aria-label="전시 브랜딩"
             >
-              <p className="mb-1">2025 가천대학교 시각디자인학과</p>
-              <p>40회 졸업전시</p>
-            </figcaption>
-          </figure>
+              {/* 로고 */}
+              <img
+                src="/images/about/hero_section_Jubilee.png"
+                alt="Jubilee 로고"
+                className={`block w-[200px] h-auto mb-5 opacity-0 ${
+                  reveal ? "slide-in-left delay-3_2s" : ""
+                }`}
+              />
+              {/* 서브 타이틀 */}
+              <img
+                src="/images/about/hero_section_sub_title_everything.png"
+                alt="everything all at once 서브 타이틀"
+                className={`block w-[220px] h-auto mb-13 opacity-0 ${
+                  reveal ? "slide-in-left delay-3_4s" : ""
+                }`}
+              />
+              {/* 학교/전시 문구 */}
+              <figcaption
+                className={`text-[14px] leading-5 text-right opacity-0 ${
+                  reveal ? "slide-in-left delay-3_6s" : ""
+                }`}
+                style={{ color: TEXT_COLOR }}
+              >
+                <p className="mb-1">2025 가천대학교 시각디자인학과</p>
+                <p>40회 졸업전시</p>
+              </figcaption>
+            </figure>
+          </div>
 
           {/* 중앙: 단순 흰색 카드 */}
 
           <video
-            className="w-[40%] h-[60%] rounded-[16px] opacity-0 fade-in-up-video delay-0_5s"
+            className="w-[520px] h-[720px] rounded-[16px] opacity-0 fade-in-up-video delay-0_5s"
             src="/images/about/hero_section_video.mp4"
             autoPlay
             muted
@@ -92,45 +94,50 @@ const HeroSection = () => {
           />
 
           {/* 우측: 전시 정보 텍스트 */}
-          <aside className="w-[320px] mt-[20%]" aria-label="전시 정보">
-            <dl
-              className="space-y-12 text-[14px] leading-5"
-              style={{ color: TEXT_COLOR }}
+          <div className="shrink-0 h-full mr-auto radial-left">
+            <aside
+              className="h-full w-full mt-[80%] mr-13 ml-3"
+              aria-label="전시 정보"
             >
-              <div
-                className={`opacity-0 ${
-                  reveal ? "slide-in-right delay-4_4s" : ""
-                }`}
+              <dl
+                className="space-y-12 text-[14px] leading-5"
+                style={{ color: TEXT_COLOR }}
               >
-                <dt className="mb-3 text-[#7A7A7A]">기간</dt>
-                <dd>
-                  <p>2025. 10. 20. - 2025. 10. 28.</p>
-                </dd>
-              </div>
-              <div
-                className={`opacity-0 ${
-                  reveal ? "slide-in-right delay-4_6s" : ""
-                }`}
-              >
-                <dt className="mb-3 text-[#7A7A7A]">운영 시간</dt>
-                <dd>
-                  <p>월-금: 10AM - 8PM</p>
-                  <p>토-일: 10AM - 6PM</p>
-                </dd>
-              </div>
-              <div
-                className={`opacity-0 ${
-                  reveal ? "slide-in-right delay-4_8s" : ""
-                }`}
-              >
-                <dt className="mb-3 text-[#7A7A7A]">전시 장소</dt>
-                <dd>
-                  <p>경기도 성남시 수정구 성남대로 1342</p>
-                  <p>가천대학교 비전타워 B1</p>
-                </dd>
-              </div>
-            </dl>
-          </aside>
+                <div
+                  className={`opacity-0 ${
+                    reveal ? "slide-in-right delay-4_4s" : ""
+                  }`}
+                >
+                  <dt className="mb-3 text-[#7A7A7A]">기간</dt>
+                  <dd>
+                    <p>2025. 10. 20. - 2025. 10. 28.</p>
+                  </dd>
+                </div>
+                <div
+                  className={`opacity-0 ${
+                    reveal ? "slide-in-right delay-4_6s" : ""
+                  }`}
+                >
+                  <dt className="mb-3 text-[#7A7A7A]">운영 시간</dt>
+                  <dd>
+                    <p>월-금: 10AM - 8PM</p>
+                    <p>토-일: 10AM - 6PM</p>
+                  </dd>
+                </div>
+                <div
+                  className={`opacity-0 ${
+                    reveal ? "slide-in-right delay-4_8s" : ""
+                  }`}
+                >
+                  <dt className="mb-3 text-[#7A7A7A]">전시 장소</dt>
+                  <dd>
+                    <p>경기도 성남시 수정구 성남대로 1342</p>
+                    <p>가천대학교 비전타워 B1</p>
+                  </dd>
+                </div>
+              </dl>
+            </aside>
+          </div>
         </div>
       </div>
     </section>

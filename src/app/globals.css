@@ -88,6 +88,26 @@ How: keyframes + 유틸리티 클래스(.slide-in-left, .slide-in-right). forwar
   animation: fadeInUpBackground 1500ms ease-out forwards;
 }
 
+/* 좌측 끝에서 시작하는 원형 그라데이션 */
+.radial-left {
+  background: radial-gradient(
+    circle at left center,
+    white 0%,
+    rgba(255, 255, 255, 0.6) 20%,
+    rgba(255, 255, 255, 0) 50%
+  );
+}
+
+/* 우측 끝에서 시작하는 원형 그라데이션 */
+.radial-right {
+  background: radial-gradient(
+    circle at right center,
+    white 0%,
+    rgba(255, 255, 255, 0.6) 20%,
+    rgba(255, 255, 255, 0) 50%
+  );
+}
+
 .fade-in-up-video {
   animation: fadeInUpVideo 1500ms ease-out forwards;
 }
