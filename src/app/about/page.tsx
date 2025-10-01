@@ -1,11 +1,41 @@
 "use client";
 
 import { PartnersCarousel } from "@/components";
+import { useEffect, useRef } from "react";
 import AboutSection from "@/components/AboutSection";
 import AboutSection2 from "@/components/AboutSection2";
 import HeroSection from "@/components/HeroSection";
 
 export default function About() {
+  // Why: 비디오가 화면에 완전히 나타났을 때만 재생하도록 제어하기 위함
+  // What: 섹션과 비디오 요소를 참조하고, IntersectionObserver로 가시성을 관찰
+  // How: threshold 0.95 이상일 때 video.play() 호출. 언마운트 시 observer 해제
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    const sectionEl = sectionRef.current;
+    const videoEl = videoRef.current;
+    if (!sectionEl || !videoEl) return;
+
+    const handleIntersect: IntersectionObserverCallback = (entries) => {
+      const entry = entries[0];
+      const isFullyVisible =
+        entry.isIntersecting && entry.intersectionRatio >= 0.95;
+      if (isFullyVisible) {
+        // iOS/Safari에서도 muted일 때 자동 재생 가능. 에러는 무시
+        void videoEl.play().catch(() => undefined);
+      }
+    };
+
+    const observer = new IntersectionObserver(handleIntersect, {
+      root: null,
+      threshold: [0, 0.5, 0.95, 1],
+    });
+    observer.observe(sectionEl);
+
+    return () => observer.disconnect();
+  }, []);
   return (
     <div className="min-h-screen bg-[#f9f9f9]">
       <main className="container mx-auto px-8 py-8">
@@ -17,12 +47,15 @@ export default function About() {
 
       {/* Why: thirdcard.mp4 비디오로 화면을 꽉 채우는 섹션 */}
       {/* What: 전체 화면 크기의 비디오 배경으로 시각적 임팩트 제공 */}
-      {/* How: sticky positioning으로 스크롤해도 고정되도록 설정 */}
-      <section className="w-screen h-screen sticky top-0 z-10 mb-230">
+      {/* How: sticky positioning으로 스크롤해도 고정되도록 설정하고, 완전 가시 시 재생 */}
+      <section
+        ref={sectionRef}
+        className="w-screen h-screen sticky top-0 z-10 mb-240"
+      >
         <video
+          ref={videoRef}
           className="w-full h-full object-cover"
           src="/images/about/thirdcard.mp4"
-          autoPlay
           muted
           playsInline
         />
