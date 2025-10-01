@@ -20,7 +20,7 @@ export default function About() {
           What: 1280px 고정 최대 폭의 2열 섹션. 좌측은 "2025 졸업 준비 위원회" 타이틀과 역할/명단, 우측은 "도움을 주신 분들" 명단을 표시.
           How: Tailwind CSS로 그리드(2cols)와 타이포를 구성. 페이지 안쪽에 위치시키고, 레이아웃의 Footer는 수정하지 않으며 이 섹션이 Footer 직전에 렌더링되도록 배치.
         */}
-        <section className="w-full mt-16">
+        <section className="w-full mt-16 mb-38">
           <div className="mx-auto max-w-[980px]">
             {/* 좌/우 두 묶음: 각 묶음 내부에 타이틀 + 본문 포함 */}
             <div className="flex justify-between gap-10">
