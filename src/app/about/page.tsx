@@ -17,15 +17,14 @@ export default function About() {
 
       {/* Why: thirdcard.mp4 비디오로 화면을 꽉 채우는 섹션 */}
       {/* What: 전체 화면 크기의 비디오 배경으로 시각적 임팩트 제공 */}
-      {/* How: 컨테이너 밖에 배치하여 전체 화면을 채움 */}
-      <section className="w-screen h-screen mb-38 relative overflow-hidden">
+      {/* How: sticky positioning으로 스크롤해도 고정되도록 설정 */}
+      <section className="w-screen h-screen sticky top-0 z-10 mb-230">
         <video
-          className="w-full h-full object-cover absolute inset-0"
+          className="w-full h-full object-cover"
           src="/images/about/thirdcard.mp4"
           autoPlay
           muted
           playsInline
-          loop
         />
       </section>
 
