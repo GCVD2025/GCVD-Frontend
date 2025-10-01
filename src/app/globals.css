@@ -25,3 +25,64 @@ body {
 .per-char-text > span[data-active="true"] {
   color: var(--char-active);
 }
+
+/*
+Why: 비디오 로딩 완료 후 3초 뒤 좌/우 텍스트가 부드럽게 슬라이드-인 되며 나타나도록 전용 애니메이션 정의.
+What: 좌측은 왼쪽→오른쪽, 우측은 오른쪽→왼쪽으로 이동하며 opacity 0→1.
+How: keyframes + 유틸리티 클래스(.slide-in-left, .slide-in-right). forwards로 최종 상태 유지.
+*/
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slide-in-left {
+  animation: slideInLeft 700ms ease-out forwards;
+}
+.slide-in-right {
+  animation: slideInRight 700ms ease-out forwards;
+}
+
+/* 애니메이션 지연 유틸 */
+.delay-3s {
+  animation-delay: 3s;
+}
+.delay-3_6s {
+  animation-delay: 3.6s;
+}
+/* 기본 3.2s 및 소폭 스태거 */
+.delay-3_2s {
+  animation-delay: 3.2s;
+}
+.delay-3_3s {
+  animation-delay: 3.3s;
+}
+.delay-3_4s {
+  animation-delay: 3.4s;
+}
+.delay-3_5s {
+  animation-delay: 3.5s;
+}
+.delay-3_7s {
+  animation-delay: 3.7s;
+}
+.delay-3_8s {
+  animation-delay: 3.8s;
+}
