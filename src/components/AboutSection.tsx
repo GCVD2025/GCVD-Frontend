@@ -1,7 +1,13 @@
+"use client";
+
 import { useScroll, useTransform, motion } from "framer-motion";
 import PerCharText from "./PerCharText";
 import { useRef } from "react";
 import { getImageSrc } from "../utils/getImageSrc";
+
+// Why: 기존 애니메이션을 유지하면서 클라이언트 컴포넌트로 분리
+// What: Framer Motion 애니메이션과 PerCharText를 포함한 원래 구현 유지
+// How: "use client" 지시어를 추가하여 클라이언트 컴포넌트로 동작
 
 const AboutSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -35,6 +41,7 @@ const AboutSection = () => {
 
   // Why: 원래 CSS translate-y 위치로 수렴하도록 아래→위 슬라이드
   // What: 각 이미지 시점에서 y를 20%→0%로 보간 (CSS 클래스는 수정하지 않음)
+  // How: useTransform으로 [start, start+FADE_WINDOW] 구간을 [0.8, 1]로 매핑
   const confettiY = useTransform(
     scrollYProgress,
     [confettiStart, confettiStart + FADE_WINDOW],

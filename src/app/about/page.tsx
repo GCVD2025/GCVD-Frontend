@@ -1,70 +1,26 @@
-"use client";
-
 import { PartnersCarousel } from "@/components";
-import { useEffect, useRef } from "react";
 import AboutSection from "@/components/AboutSection";
 import AboutSection2 from "@/components/AboutSection2";
 import HeroSection from "@/components/HeroSection";
-import { getImageSrc } from "@/utils/getImageSrc";
+import VideoSection from "@/components/VideoSection";
+
+// Why: 페이지를 서버 컴포넌트로 유지하면서 SSG 최적화
+// What: 정적 콘텐츠는 서버에서 렌더링하고, 인터랙티브 요소는 클라이언트 컴포넌트로 분리
+// How: "use client" 지시어를 제거하고 서버 컴포넌트로 변경, 비디오 로직은 별도 컴포넌트로 분리
 
 export default function About() {
-  // Why: 비디오가 화면에 완전히 나타났을 때만 한 번 재생하도록 제어하기 위함
-  // What: 비디오 컨테이너와 비디오 요소를 참조하고, 재생 상태를 추적하여 한 번만 실행
-  // How: threshold 0.35 이상일 때 video.play() 호출하고, 재생 후 observer 해제
-  const videoContainerRef = useRef<HTMLDivElement | null>(null);
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-  const hasPlayedRef = useRef(false);
-
-  useEffect(() => {
-    const containerEl = videoContainerRef.current;
-    const videoEl = videoRef.current;
-    if (!containerEl || !videoEl) return;
-
-    const handleIntersect: IntersectionObserverCallback = (entries) => {
-      const entry = entries[0];
-      const isFullyVisible =
-        entry.isIntersecting && entry.intersectionRatio >= 0.35;
-
-      if (isFullyVisible && !hasPlayedRef.current) {
-        hasPlayedRef.current = true;
-        // iOS/Safari에서도 muted일 때 자동 재생 가능. 에러는 무시
-        void videoEl.play().catch(() => undefined);
-        // 한 번 재생했으므로 observer 해제
-        observer.disconnect();
-      }
-    };
-
-    const observer = new IntersectionObserver(handleIntersect, {
-      root: null,
-      threshold: [0, 0.5, 0.95, 1],
-    });
-    observer.observe(containerEl);
-
-    return () => observer.disconnect();
-  }, []);
   return (
     <div className="min-h-screen bg-[#f9f9f9]">
       <main className="container mx-auto px-8 py-8">
         <HeroSection />
         <AboutSection />
-
         <AboutSection2 />
       </main>
 
       {/* Why: thirdcard.mp4 비디오로 화면을 꽉 채우는 섹션 */}
       {/* What: 전체 화면 크기의 비디오 배경으로 시각적 임팩트 제공 */}
       {/* How: sticky positioning으로 스크롤해도 고정되도록 설정하고, 완전 가시 시 재생 */}
-      <section className="w-screen h-[200vh] sticky top-0 z-10 mb-240">
-        <div ref={videoContainerRef} className="w-screen h-screen sticky top-0">
-          <video
-            ref={videoRef}
-            className="w-full h-full object-cover"
-            src={getImageSrc("/images/about/thirdcard.mp4")}
-            muted
-            playsInline
-          />
-        </div>
-      </section>
+      <VideoSection />
 
       <main className="container mx-auto px-8 py-8">
         {/* 파트너스 캐러셀 */}

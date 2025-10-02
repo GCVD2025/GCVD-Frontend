@@ -1,3 +1,5 @@
+"use client";
+
 import {
   useScroll,
   useTransform,
@@ -7,6 +9,10 @@ import {
 import PerCharText from "./PerCharText";
 import { useEffect, useRef } from "react";
 import { getImageSrc } from "../utils/getImageSrc";
+
+// Why: 기존 애니메이션을 유지하면서 클라이언트 컴포넌트로 분리
+// What: Framer Motion 애니메이션과 PerCharText를 포함한 원래 구현 유지
+// How: "use client" 지시어를 추가하여 클라이언트 컴포넌트로 동작
 
 const AboutSection2 = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -173,7 +179,7 @@ const AboutSection2 = () => {
               "이제 스스로를 뽐내며 하늘로 날아오를 준비가 끝났습니다.",
               "",
               "하늘 위의 우리는 마치 별처럼 자신만의 가능성을 밝게 빛낼 것입니다.",
-              "공중을 자유롭게 유영하며 축제의 순간을 더없이 즐기고, ",
+              "공중을 자유롭게 유영하며 축제의 순간을 더없이 즐기고, ",
               "그 기쁨을 날개 삼아 더 넓은 하늘로 나아갈 것입니다.",
             ]}
           />
