@@ -8,6 +8,7 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, FreeMode } from "swiper/modules";
 import "swiper/css";
+import { getImageSrc } from "../utils/getImageSrc";
 
 // Why: 실제 파트너사 로고 이미지를 사용하여 브랜드 협업을 실제로 보여주기 위함
 // What: about 폴더에 추가된 파트너사 로고 이미지들을 배열로 정의
@@ -53,7 +54,7 @@ function PartnersCarousel(): React.ReactElement {
               <SwiperSlide key={src}>
                 <div className="flex h-[72px] items-center justify-center">
                   <img
-                    src={src}
+                    src={getImageSrc(src)}
                     alt={`파트너 로고 ${index + 1}`}
                     className="h-[60px] w-auto object-contain"
                     loading="lazy"

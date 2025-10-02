@@ -1,6 +1,7 @@
 import { useScroll, useTransform, motion } from "framer-motion";
 import PerCharText from "./PerCharText";
 import { useRef } from "react";
+import { getImageSrc } from "../utils/getImageSrc";
 
 const AboutSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -70,20 +71,20 @@ const AboutSection = () => {
         <motion.img
           className="absolute translate-y-[-20%] z-0"
           style={{ opacity: confettiOpacity, y: confettiY }}
-          src="/images/about/about_section_confetti.png"
+          src={getImageSrc("/images/about/about_section_confetti.png")}
           alt="confetti"
         />
 
         <motion.img
           className="absolute translate-y-[100%] z-0"
           style={{ opacity: greenOpacity, y: greenY }}
-          src="/images/about/about_section_green_light.png"
+          src={getImageSrc("/images/about/about_section_green_light.png")}
           alt="green light"
         />
         <motion.img
           className="absolute translate-y-[68%] z-0"
           style={{ opacity: handOpacity, y: handY }}
-          src="/images/about/about_section_hand.png"
+          src={getImageSrc("/images/about/about_section_hand.png")}
           alt="hand"
         />
       </div>

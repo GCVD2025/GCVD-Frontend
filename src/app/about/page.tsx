@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 import AboutSection from "@/components/AboutSection";
 import AboutSection2 from "@/components/AboutSection2";
 import HeroSection from "@/components/HeroSection";
+import { getImageSrc } from "@/utils/getImageSrc";
 
 export default function About() {
   // Why: 비디오가 화면에 완전히 나타났을 때만 한 번 재생하도록 제어하기 위함
@@ -58,7 +59,7 @@ export default function About() {
           <video
             ref={videoRef}
             className="w-full h-full object-cover"
-            src="/images/about/thirdcard.mp4"
+            src={getImageSrc("/images/about/thirdcard.mp4")}
             muted
             playsInline
           />

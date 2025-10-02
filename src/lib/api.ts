@@ -132,7 +132,7 @@ export const apiClient = new ApiClient();
 // API 에러 클래스
 export class ApiError extends Error {
   public status: number;
-  public details?: any;
+  public details?: unknown;
 
   constructor({ message, status, details }: ApiErrorData) {
     super(message);

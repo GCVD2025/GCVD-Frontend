@@ -6,6 +6,7 @@ import {
 } from "framer-motion";
 import PerCharText from "./PerCharText";
 import { useEffect, useRef } from "react";
+import { getImageSrc } from "../utils/getImageSrc";
 
 const AboutSection2 = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -181,13 +182,13 @@ const AboutSection2 = () => {
         <motion.img
           className="absolute top-[50%] translate-y-[-50%] z-0"
           style={{ opacity: confettiOpacity, scale: wingsScale }}
-          src="/images/about/about_section_pink_light.png"
+          src={getImageSrc("/images/about/about_section_pink_light.png")}
           alt="confetti"
         />
         <motion.img
           className="absolute top-[50%] translate-y-[-50%] z-0"
           style={{ opacity: greenOpacity, scale: pinkScale }}
-          src="/images/about/about_section_wings.png"
+          src={getImageSrc("/images/about/about_section_wings.png")}
           alt="green light"
         />
 
@@ -196,28 +197,28 @@ const AboutSection2 = () => {
           className="absolute top-[0%] translate-y-[-90%] left-[4%] z-0 w-[12%]"
           style={{ opacity: uiuxOpacity }}
           animate={uiuxControls}
-          src="/images/about/Uiux.png"
+          src={getImageSrc("/images/about/Uiux.png")}
           alt="green light"
         />
         <motion.img
           className="absolute top-[5%] translate-y-[-50%] left-[14%] z-0 w-[12%]"
           style={{ opacity: graphicOpacity }}
           animate={graphicControls}
-          src="/images/about/Graphic.png"
+          src={getImageSrc("/images/about/Graphic.png")}
           alt="green light"
         />
         <motion.img
           className="absolute top-[25%] left-[5%] z-0 w-[12%]"
           style={{ opacity: mediaOpacity }}
           animate={mediaControls}
-          src="/images/about/Media.png"
+          src={getImageSrc("/images/about/Media.png")}
           alt="green light"
         />
         <motion.img
           className="absolute top-[50%]  left-[18%] z-0 w-[12%]"
           style={{ opacity: threeDOpacity }}
           animate={threeDControls}
-          src="/images/about/3D.png"
+          src={getImageSrc("/images/about/3D.png")}
           alt="green light"
         />
 
@@ -226,28 +227,28 @@ const AboutSection2 = () => {
           className="absolute top-[0%] translate-y-[-90%] right-[6%] z-0 w-[12%]"
           style={{ opacity: uiuxOpacity }}
           animate={uiuxControls}
-          src="/images/about/Game.png"
+          src={getImageSrc("/images/about/Game.png")}
           alt="green light"
         />
         <motion.img
           className="absolute top-[5%] translate-y-[-50%] right-[14%] z-0 w-[12%]"
           style={{ opacity: graphicOpacity }}
           animate={graphicControls}
-          src="/images/about/Illust.png"
+          src={getImageSrc("/images/about/Illust.png")}
           alt="green light"
         />
         <motion.img
           className="absolute top-[25%] right-[8%] z-0 w-[12%]"
           style={{ opacity: mediaOpacity }}
           animate={mediaControls}
-          src="/images/about/Editorial.png"
+          src={getImageSrc("/images/about/Editorial.png")}
           alt="green light"
         />
         <motion.img
           className="absolute top-[45%] right-[18%] z-0 w-[12%]"
           style={{ opacity: threeDOpacity }}
           animate={threeDControls}
-          src="/images/about/Branding.png"
+          src={getImageSrc("/images/about/Branding.png")}
           alt="green light"
         />
       </div>

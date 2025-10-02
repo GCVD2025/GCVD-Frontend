@@ -5,6 +5,7 @@
 // How: Tailwind로 고정 폭 컨테이너와 컬럼 간격을 구성. 표준 <img>만 사용(next/image 금지 규칙 준수). 타이포는 14px/20px과 #202020 적용.
 
 import { useState, useEffect, useRef } from "react";
+import { getImageSrc } from "../utils/getImageSrc";
 
 const HeroSection = () => {
   // Why: 비디오가 로딩된 뒤 3초 후 텍스트가 좌/우에서 슬라이드 인 되도록 제어 상태가 필요
@@ -36,7 +37,7 @@ const HeroSection = () => {
       {/* 배경 이미지: 섹션 전체에 깔림 */}
       <div className="absolute inset-0 ">
         <img
-          src="/images/about/hero_section_background.png"
+          src={getImageSrc("/images/about/hero_section_background.png")}
           alt="About 섹션 배경 그래픽"
           className="w-full object-cover opacity-0 fade-in-up-background delay-1s"
         />
@@ -52,7 +53,7 @@ const HeroSection = () => {
             >
               {/* 로고 */}
               <img
-                src="/images/about/hero_section_Jubilee.png"
+                src={getImageSrc("/images/about/hero_section_Jubilee.png")}
                 alt="Jubilee 로고"
                 className={`block w-[200px] h-auto mb-5 opacity-0 ${
                   reveal ? "slide-in-left delay-3_2s" : ""
@@ -60,7 +61,9 @@ const HeroSection = () => {
               />
               {/* 서브 타이틀 */}
               <img
-                src="/images/about/hero_section_sub_title_everything.png"
+                src={getImageSrc(
+                  "/images/about/hero_section_sub_title_everything.png"
+                )}
                 alt="everything all at once 서브 타이틀"
                 className={`block w-[220px] h-auto mb-13 opacity-0 ${
                   reveal ? "slide-in-left delay-3_4s" : ""
@@ -82,7 +85,7 @@ const HeroSection = () => {
 
           <video
             className="w-[520px] h-[720px] rounded-[16px] opacity-0 fade-in-up-video delay-0_5s"
-            src="/images/about/hero_section_video.mp4"
+            src={getImageSrc("/images/about/hero_section_video.mp4")}
             autoPlay
             muted
             playsInline
