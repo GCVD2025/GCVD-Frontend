@@ -23,7 +23,7 @@ export default function WorkCard({
 
   return (
     <Link href={`/works/${id}`} className="block">
-      <div className="backdrop-blur-[16px] w-[240px] h-[308px] rounded-[12px] bg-gradient(180deg, rgb(255, 255, 255) 80%, rgb(255, 255, 255) 40%) shadow-[0_0_24px_rgba(0,0,0,0.05)] overflow-hidden cursor-pointer hover:shadow-[0_0_32px_rgba(0,0,0,0.1)] transition-shadow duration-300">
+      <div className="backdrop-blur-[16px] w-[240px] h-[308px] rounded-[12px] bg-gradient(180deg, rgb(255, 255, 255) 80%, rgb(255, 255, 255) 40%) shadow-[0_0_24px_rgba(0,0,0,0.05)] overflow-hidden cursor-pointer hover:shadow-[0_0_32px_rgba(0,0,0,0.1)] hover:scale-102 transition-all duration-300 ease-in-out">
         <div className="w-full h-[192px]">
           <img
             src={getImageSrc(imageUrl || "/images/works/sample.png")}
