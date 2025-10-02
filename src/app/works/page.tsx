@@ -9,12 +9,16 @@ import { worksData } from "../../data/works";
 import { designersData } from "../../data/designers";
 import { filterWorksByQuery } from "../../utils/filterWorks";
 
-// Why: designer_id를 기반으로 디자이너 정보를 찾는 헬퍼 함수
+// Why: designer_id 배열을 기반으로 디자이너 정보들을 찾는 헬퍼 함수
 // What: works 데이터와 designers 데이터를 연결하는 함수
-// How: designer_id로 매칭하여 디자이너 이름을 반환
-const getDesignerName = (designerId: string): string => {
-  const designer = designersData.find((d) => d.designer_id === designerId);
-  return designer ? designer.designer_name : "Unknown";
+// How: designer_id 배열로 매칭하여 모든 디자이너 이름을 쉼표로 구분하여 반환
+const getDesignerName = (designerIds: string[]): string => {
+  const designers = designersData.filter((d) =>
+    designerIds.includes(d.designer_id)
+  );
+  return designers.length > 0
+    ? designers.map((d) => d.designer_name).join(", ")
+    : "Unknown";
 };
 
 export default function Works() {

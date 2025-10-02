@@ -16,7 +16,7 @@ export interface Work {
   work_id: string;
   work_title: string;
   work_sub_title: string;
-  designer_id: string;
+  designer_id: string[];
   work_thumbnail: string | undefined;
   work_categories: string[];
   work_detail_images: string[] | undefined;

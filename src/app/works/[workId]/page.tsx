@@ -28,12 +28,12 @@ export default function WorkDetailPage({ params }: WorkDetailPageProps) {
   // How: find 메서드를 사용하여 매칭되는 작품 데이터를 찾음
   const work = worksData.find((w) => w.work_id === workId);
 
-  // Why: designer_id를 기반으로 디자이너 정보를 찾는 함수
-  // What: designersData에서 해당 designer_id와 일치하는 디자이너 정보를 반환
-  // How: find 메서드를 사용하여 매칭되는 디자이너 데이터를 찾음
-  const designer = work
-    ? designersData.find((d) => d.designer_id === work.designer_id)
-    : null;
+  // Why: designer_id 배열을 기반으로 디자이너 정보들을 찾는 함수
+  // What: designersData에서 해당 designer_id들과 일치하는 디자이너 정보들을 반환
+  // How: filter 메서드를 사용하여 매칭되는 모든 디자이너 데이터를 찾음
+  const designers = work
+    ? designersData.filter((d) => work.designer_id.includes(d.designer_id))
+    : [];
 
   // Why: 작품 데이터가 없을 경우 기본값 설정
   // What: work나 designer가 없을 경우 기본 데이터를 사용
@@ -42,10 +42,10 @@ export default function WorkDetailPage({ params }: WorkDetailPageProps) {
     ? {
         title: work.work_title,
         subtitle: work.work_sub_title,
-        author: designer?.designer_name || "Unknown",
-        authorEn: designer?.designer_english_name || "Unknown",
-        email: designer?.designer_email || "",
-        instagram: designer?.designer_insta_id,
+        authors: designers.map((d) => d.designer_name).join(", "),
+        authorsEn: designers.map((d) => d.designer_english_name).join(", "),
+        emails: designers.map((d) => d.designer_email),
+        instagrams: designers.map((d) => d.designer_insta_id).filter(Boolean),
         categories: work.work_categories.map((category) =>
           category.toLowerCase()
         ),
@@ -56,10 +56,10 @@ export default function WorkDetailPage({ params }: WorkDetailPageProps) {
     : {
         title: "작품을 찾을 수 없습니다",
         subtitle: "",
-        author: "Unknown",
-        authorEn: "Unknown",
-        email: "",
-        instagram: "",
+        authors: "Unknown",
+        authorsEn: "Unknown",
+        emails: [],
+        instagrams: [],
         categories: [],
         description: "해당 작품을 찾을 수 없습니다.",
         thumbnail: "",
@@ -107,19 +107,21 @@ export default function WorkDetailPage({ params }: WorkDetailPageProps) {
             {/* 작가 정보 - 8px, 16px 간격, 40px 하단 여백 */}
             <div className="flex flex-col mb-10">
               <div className="text-[14px] font-bold text-[#202020] mb-2">
-                {workData.author}
+                {workData.authors}
               </div>
               <div className="text-[12px] text-[#20202099]">
-                {workData.authorEn}
+                {workData.authorsEn}
               </div>
-              <div className="flex items-center gap-1 text-[9px] text-[#20202080] mt-4">
-                <EmailIcon size={9} />
-                <span>{workData.email}</span>
-              </div>
-              {workData.instagram && (
+              {workData.emails.length > 0 && (
+                <div className="flex items-center gap-1 text-[9px] text-[#20202080] mt-4">
+                  <EmailIcon size={9} />
+                  <span>{workData.emails.join(", ")}</span>
+                </div>
+              )}
+              {workData.instagrams.length > 0 && (
                 <div className="flex items-center gap-1 text-[9px] text-[#20202080]">
                   <InstagramIcon size={9} />
-                  <span>{workData.instagram}</span>
+                  <span>{workData.instagrams.join(", ")}</span>
                 </div>
               )}
             </div>
