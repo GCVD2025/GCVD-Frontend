@@ -39,7 +39,7 @@ export const categories: CategoryItem[] = [
     label: "Illust",
     Icon: IllustIcon,
     icon_color: "#FF8585",
-    queryKey: "illust",
+    queryKey: "illustration",
   },
   {
     label: "Editorial",
