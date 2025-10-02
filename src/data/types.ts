@@ -15,8 +15,11 @@ export interface Designer {
 export interface Work {
   work_id: string;
   work_title: string;
-  work_category: string;
-  work_description: string;
-  work_image: string;
+  work_sub_title: string;
   designer_id: string;
+  work_thumbnail: string;
+  work_category_main: string;
+  work_category_sub: string;
+  work_detail_images: string[];
+  work_description: string;
 }

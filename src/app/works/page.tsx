@@ -4,102 +4,16 @@ import { Suspense } from "react";
 import FilterSidebar from "./FilterSidebar";
 import WorkCard from "../../components/WorkCard";
 import { getImageSrc } from "../../utils/getImageSrc";
+import { worksData } from "../../data/works";
+import { designersData } from "../../data/designers";
 
-// Why: 작품 데이터를 상수로 분리하여 재사용성과 유지보수성 향상
-// What: 작품 목록 데이터 정의
-// How: 배열 형태로 작품 정보들을 구조화
-const worksData = [
-  {
-    id: "1",
-    title: "프로젝트 제목",
-    author: "홍길동",
-    categories: ["branding", "illust"],
-  },
-  {
-    id: "2",
-    title: "프로젝트 제목",
-    author: "홍길동",
-    categories: ["branding", "illust"],
-  },
-  {
-    id: "3",
-    title: "프로젝트 제목",
-    author: "홍길동",
-    categories: ["branding", "illust"],
-  },
-  {
-    id: "4",
-    title: "프로젝트 제목",
-    author: "홍길동",
-    categories: ["branding", "illust"],
-  },
-  {
-    id: "5",
-    title: "프로젝트 제목",
-    author: "홍길동",
-    categories: ["branding", "illust"],
-  },
-  {
-    id: "6",
-    title: "프로젝트 제목",
-    author: "홍길동",
-    categories: ["branding", "illust"],
-  },
-  {
-    id: "7",
-    title: "프로젝트 제목",
-    author: "홍길동",
-    categories: ["branding", "illust"],
-  },
-  {
-    id: "8",
-    title: "프로젝트 제목",
-    author: "홍길동",
-    categories: ["branding", "illust"],
-  },
-  {
-    id: "9",
-    title: "프로젝트 제목",
-    author: "홍길동",
-    categories: ["branding", "illust"],
-  },
-  {
-    id: "10",
-    title: "프로젝트 제목",
-    author: "홍길동",
-    categories: ["branding", "illust"],
-  },
-  {
-    id: "11",
-    title: "프로젝트 제목",
-    author: "홍길동",
-    categories: ["branding", "illust"],
-  },
-  {
-    id: "12",
-    title: "프로젝트 제목",
-    author: "홍길동",
-    categories: ["branding", "illust"],
-  },
-  {
-    id: "13",
-    title: "프로젝트 제목",
-    author: "홍길동",
-    categories: ["branding", "illust"],
-  },
-  {
-    id: "14",
-    title: "프로젝트 제목",
-    author: "홍길동",
-    categories: ["branding", "illust"],
-  },
-  {
-    id: "15",
-    title: "프로젝트 제목",
-    author: "홍길동",
-    categories: ["branding", "illust"],
-  },
-];
+// Why: designer_id를 기반으로 디자이너 정보를 찾는 헬퍼 함수
+// What: works 데이터와 designers 데이터를 연결하는 함수
+// How: designer_id로 매칭하여 디자이너 이름을 반환
+const getDesignerName = (designerId: string): string => {
+  const designer = designersData.find((d) => d.designer_id === designerId);
+  return designer ? designer.designer_name : "Unknown";
+};
 
 export default function Works() {
   return (
@@ -122,11 +36,14 @@ export default function Works() {
         <section className="w-full mx-auto grid [grid-template-columns:repeat(3,240px)] gap-x-[20px] gap-y-[24px] justify-center">
           {worksData.map((work) => (
             <WorkCard
-              key={work.id}
-              id={work.id}
-              title={work.title}
-              author={work.author}
-              categories={work.categories}
+              key={work.work_id}
+              id={work.work_id}
+              title={work.work_title}
+              author={getDesignerName(work.designer_id)}
+              categories={[
+                work.work_category_main.toLowerCase(),
+                work.work_category_sub.toLowerCase(),
+              ]}
             />
           ))}
         </section>
