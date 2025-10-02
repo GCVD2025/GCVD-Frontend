@@ -1,24 +1,40 @@
 "use client";
 
+import { useState } from "react";
 import {
   CategoriesDeepGreenLeftIcon,
   CategoriesDeepGreenRightIcon,
 } from "../../components/icons";
 import CommentCard from "../../components/CommentCard";
-import { BlurOverlay } from "@/components";
+import { BlurOverlay, LoadingSpinner, ErrorMessage } from "@/components";
 import { getImageSrc } from "../../utils/getImageSrc";
+import { useGuestbooks, useCreateGuestbook } from "../../hooks/useGuestbook";
+import { formatKoreanDate } from "../../utils/date";
 
 // Why: 게스트 페이지를 Designers의 서브타이틀/카드 레이아웃과 동일한 톤으로 구현
 // What: 상단 서브타이틀(초록) + 입력 박스 영역 + 댓글 카드 그리드
 // How: 재사용 가능한 아이콘/카드 토큰과 Tailwind 유틸을 그대로 활용
 export default function Guest() {
-  const comments = Array.from({ length: 8 }, (_, i) => ({
-    name: "홍길동",
-    content:
-      "임의 내용 입력 임의 내용 입력 임의 내용 입력 임의 내용 입력 임의 내용 입력 임의 내용 입력 임의 내용",
-    dateText: "2023.10.20   17:02",
-    metaRight: `댓글 ${i + 1}`,
-  }));
+  const [author, setAuthor] = useState("");
+  const [content, setContent] = useState("");
+
+  // API에서 방명록 데이터 가져오기
+  const { data: guestbooks, isLoading, error } = useGuestbooks();
+  const createGuestbookMutation = useCreateGuestbook();
+
+  // 방명록 작성 핸들러
+  const handleSubmit = async () => {
+    try {
+      await createGuestbookMutation.mutateAsync({ author, content });
+      setAuthor("");
+      setContent("");
+      alert("방명록이 작성되었습니다!");
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : "방명록 작성에 실패했습니다.";
+      alert(errorMessage);
+    }
+  };
 
   return (
     <>
@@ -55,14 +71,29 @@ export default function Guest() {
               <input
                 type="text"
                 placeholder="이름을 입력하세요."
+                value={author}
+                onChange={(e) => setAuthor(e.target.value)}
+                maxLength={50}
                 className="w-full p-3 outline-none placeholder:text-[#20202066] text-[14px] rounded-[8px] text-semibold bg-[linear-gradient(90deg,rgba(0,0,0,0.03),rgba(0,0,0,0.01))]"
               />
               <textarea
                 placeholder="내용을 입력하세요. 한 번 작성한 내용은 수정 및 삭제할 수 없습니다."
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                maxLength={300}
                 className="w-full p-3 resize-none outline-none placeholder:text-[#20202066] rounded-[8px] text-[12px] bg-[linear-gradient(90deg,rgba(0,0,0,0.013),rgba(0,0,0,0.009))]"
               />
             </div>
-            <button aria-label="submit">
+            <button
+              aria-label="submit"
+              onClick={handleSubmit}
+              disabled={
+                createGuestbookMutation.isPending ||
+                !author.trim() ||
+                !content.trim()
+              }
+              className="disabled:opacity-50 disabled:cursor-not-allowed"
+            >
               <img
                 src={getImageSrc("/images/common/send_button.png")}
                 alt="send"
@@ -77,14 +108,27 @@ export default function Guest() {
         {/* How: flex-col 스택 구성 */}
         <section className="w-full flex items-center justify-center">
           <div className="w-[732px] flex flex-col gap-[24px]">
-            {comments.map((c, idx) => (
-              <CommentCard
-                key={idx}
-                name={c.name}
-                content={c.content}
-                dateText={c.dateText}
+            {isLoading ? (
+              <LoadingSpinner size="lg" className="py-8" />
+            ) : error ? (
+              <ErrorMessage
+                message="방명록을 불러오는데 실패했습니다."
+                onRetry={() => window.location.reload()}
               />
-            ))}
+            ) : guestbooks && guestbooks.length > 0 ? (
+              guestbooks.map((guestbook, idx) => (
+                <CommentCard
+                  key={`${guestbook.author}-${guestbook.createdAt}-${idx}`}
+                  name={guestbook.author}
+                  content={guestbook.content}
+                  dateText={formatKoreanDate(guestbook.createdAt)}
+                />
+              ))
+            ) : (
+              <div className="text-center py-8 text-gray-500">
+                아직 작성된 방명록이 없습니다.
+              </div>
+            )}
           </div>
         </section>
       </main>

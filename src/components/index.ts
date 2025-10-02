@@ -8,3 +8,6 @@ export { default as DesignerCard } from "./DesignerCard";
 export { default as CommentCard } from "./CommentCard";
 export { default as Footer } from "./Footer";
 export { default as PartnersCarousel } from "./PartnersCarousel";
+export { LoadingSpinner } from "./LoadingSpinner";
+export { ErrorMessage } from "./ErrorMessage";
+export { QueryProvider } from "./QueryProvider";
