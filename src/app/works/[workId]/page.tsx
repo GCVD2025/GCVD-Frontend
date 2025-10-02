@@ -128,7 +128,7 @@ export default function WorkDetailPage({ params }: WorkDetailPageProps) {
 
             {/* 작품 설명 */}
             <div>
-              <div className="text-[11px] text-[#202020E5] leading-relaxed">
+              <div className="text-[12px] text-[#202020E5] leading-relaxed">
                 {workData.description}
               </div>
             </div>
