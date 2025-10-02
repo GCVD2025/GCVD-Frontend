@@ -29,11 +29,14 @@ export default function DesignerCard({ designer }: DesignerCardProps) {
     router.push(`/works/${work_id}`);
   };
   return (
-    <div className="backdrop-blur-[16px] w-[176px] rounded-[12px] bg-gradient(180deg, rgb(255, 255, 255) 60%, rgb(255, 255, 255) 40%) shadow-[0_0_24px_rgba(0,0,0,0.05)] overflow-hidden group">
+    <div className="backdrop-blur-[16px] w-[176px] rounded-[12px] bg-gradient(180deg, rgb(255, 255, 255) 60%, rgb(255, 255, 255) 40%) shadow-[0_0_24px_rgba(0,0,0,0.05)] overflow-hidden">
       {/* Why: 이미지 영역을 위한 공간 확보 및 hover 효과 구현 */}
       {/* What: 192px 높이의 이미지 영역과 hover 시 오버레이 */}
       {/* How: img 태그를 사용하여 크기만 설정하고, group hover로 오버레이 효과 구현 */}
-      <div className="p-4 cursor-pointer relative" onClick={handleViewWork}>
+      <div
+        className="p-4 cursor-pointer relative group"
+        onClick={handleViewWork}
+      >
         <img
           src={getImageSrc(`/images/designers/${designer_profile_image}`)}
           alt={designer_name}
