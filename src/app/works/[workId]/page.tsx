@@ -46,10 +46,9 @@ export default function WorkDetailPage({ params }: WorkDetailPageProps) {
         authorEn: designer?.designer_english_name || "Unknown",
         email: designer?.designer_email || "",
         instagram: designer?.designer_insta_id,
-        categories: [
-          work.work_category_main.toLowerCase(),
-          work.work_category_sub.toLowerCase(),
-        ],
+        categories: work.work_categories.map((category) =>
+          category.toLowerCase()
+        ),
         description: work.work_description,
         thumbnail: work.work_thumbnail,
         detailImages: work.work_detail_images,

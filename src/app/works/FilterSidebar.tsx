@@ -67,14 +67,14 @@ export function FilterSidebar() {
    * 2. 단일 선택: 한 번에 하나의 필터만 선택 가능
    * 3. 선택된 필터 클릭: 아무 일도 일어나지 않음 (해제되지 않음)
    * 4. 다른 필터 클릭: 기존 선택 해제 후 새로운 필터 선택
-   * 5. 쿼리스트링 관리: 선택된 필터는 ?filterKey=true 형태로 URL에 반영
+   * 5. 쿼리스트링 관리: 선택된 필터는 ?category=filterKey 형태로 URL에 반영
    */
   const handleFilterClick = (queryKey: string) => {
     // 현재 선택된 필터인지 확인 (기본값 all 고려)
     const isCurrentlyActive =
       searchParams.toString() === ""
         ? queryKey === "all"
-        : searchParams.get(queryKey) !== null;
+        : searchParams.get("category") === queryKey;
 
     // 선택된 필터를 다시 클릭하면 아무 일도 일어나지 않음
     if (isCurrentlyActive) {
@@ -83,7 +83,9 @@ export function FilterSidebar() {
 
     // 다른 필터를 클릭하면 해당 필터만 선택
     const params = new URLSearchParams();
-    params.set(queryKey, "true");
+    if (queryKey !== "all") {
+      params.set("category", queryKey);
+    }
     router.push(`${pathname}?${params.toString()}`);
   };
 
@@ -117,7 +119,7 @@ export function FilterSidebar() {
           const isActive =
             searchParams.toString() === ""
               ? queryKey === "all"
-              : searchParams.get(queryKey) !== null;
+              : searchParams.get("category") === queryKey;
 
           return (
             <li
