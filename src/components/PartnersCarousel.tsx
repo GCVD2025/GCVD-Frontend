@@ -9,9 +9,17 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, FreeMode } from "swiper/modules";
 import "swiper/css";
 
-const DUMMY_LOGOS = Array.from({ length: 10 }).map(
-  (_, i) => `https://placehold.co/200x64?text=Logo+${i + 1}`
-);
+// Why: 실제 파트너사 로고 이미지를 사용하여 브랜드 협업을 실제로 보여주기 위함
+// What: about 폴더에 추가된 파트너사 로고 이미지들을 배열로 정의
+// How: 이미지 경로를 직접 지정하여 더미 이미지 대신 실제 로고 사용
+const PARTNER_LOGOS = [
+  "/images/about/Yoondesign.png",
+  "/images/about/kinko_s.png",
+  "/images/about/photo_mate.png",
+  "/images/about/rixfont.png",
+  "/images/about/vine_extra_color.png",
+  "/images/about/오늘.png",
+];
 
 function PartnersCarousel(): React.ReactElement {
   return (
@@ -41,13 +49,13 @@ function PartnersCarousel(): React.ReactElement {
             modules={[Autoplay, FreeMode]}
             className="py-4"
           >
-            {DUMMY_LOGOS.map((src) => (
+            {PARTNER_LOGOS.map((src, index) => (
               <SwiperSlide key={src}>
                 <div className="flex h-[72px] items-center justify-center">
                   <img
                     src={src}
-                    alt="파트너 로고 더미"
-                    className="h-[64px] w-auto object-contain"
+                    alt={`파트너 로고 ${index + 1}`}
+                    className="h-[60px] w-auto object-contain"
                     loading="lazy"
                   />
                 </div>
