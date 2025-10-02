@@ -60,7 +60,6 @@ export const categories: CategoryItem[] = [
 export const getCategoryByQueryKey = (
   queryKey: string
 ): CategoryItem | undefined => {
-  console.log(queryKey);
   return categories.find((category) => category.queryKey === queryKey);
 };
 

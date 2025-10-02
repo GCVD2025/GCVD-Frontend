@@ -21,7 +21,10 @@ const getDesignerName = (designerIds: string[]): string => {
     : "Unknown";
 };
 
-export default function Works() {
+// Why: useSearchParams를 사용하는 컴포넌트를 분리하여 Suspense boundary로 감싸기 위함
+// What: 쿼리 파라미터를 읽어서 필터링된 작품 목록을 렌더링하는 컴포넌트
+// How: useSearchParams 훅을 사용하여 필터링된 작품들을 렌더링
+function WorksContent() {
   // Why: URL 쿼리스트링을 읽어서 필터링 조건을 파악
   // What: 현재 활성화된 필터 정보를 가져오는 훅
   // How: useSearchParams 훅을 사용하여 쿼리스트링 파라미터 접근
@@ -32,6 +35,24 @@ export default function Works() {
   // How: filterWorksByQuery 유틸리티 함수를 사용하여 필터링 수행
   const filteredWorks = filterWorksByQuery(worksData, searchParams);
 
+  return (
+    <section className="w-full mx-auto grid [grid-template-columns:repeat(3,240px)] gap-x-[20px] gap-y-[24px] justify-center">
+      {filteredWorks.map((work) => (
+        <WorkCard
+          key={work.work_id}
+          id={work.work_id}
+          title={work.work_title}
+          author={getDesignerName(work.designer_id)}
+          categories={work.work_categories.map((category) =>
+            category.toLowerCase()
+          )}
+        />
+      ))}
+    </section>
+  );
+}
+
+export default function Works() {
   return (
     <>
       <img
@@ -46,22 +67,18 @@ export default function Works() {
           <FilterSidebar />
         </Suspense>
 
-        {/* Why: 필터링된 작품 카드들을 그리드 레이아웃으로 배치하여 일관된 간격 유지 */}
-        {/* What: 3열 그리드로 필터링된 작품 카드들을 배치하는 섹션 */}
-        {/* How: CSS Grid를 사용하여 240px 너비의 카드들을 20px 간격으로 배치 */}
-        <section className="w-full mx-auto grid [grid-template-columns:repeat(3,240px)] gap-x-[20px] gap-y-[24px] justify-center">
-          {filteredWorks.map((work) => (
-            <WorkCard
-              key={work.work_id}
-              id={work.work_id}
-              title={work.work_title}
-              author={getDesignerName(work.designer_id)}
-              categories={work.work_categories.map((category) =>
-                category.toLowerCase()
-              )}
-            />
-          ))}
-        </section>
+        {/* Why: useSearchParams를 사용하는 컴포넌트를 Suspense로 감싸서 SSG 빌드 에러 방지 */}
+        {/* What: 쿼리 파라미터 기반 필터링된 작품 목록을 렌더링하는 섹션 */}
+        {/* How: Suspense boundary로 감싸서 서버 사이드 렌더링 중 안전하게 처리 */}
+        <Suspense
+          fallback={
+            <div className="w-full flex justify-center items-center">
+              로딩 중...
+            </div>
+          }
+        >
+          <WorksContent />
+        </Suspense>
       </main>
     </>
   );
