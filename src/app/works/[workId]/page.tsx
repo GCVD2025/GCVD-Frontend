@@ -45,7 +45,7 @@ export default function WorkDetailPage({ params }: WorkDetailPageProps) {
         author: designer?.designer_name || "Unknown",
         authorEn: designer?.designer_english_name || "Unknown",
         email: designer?.designer_email || "",
-        instagram: designer?.designer_insta_id || "",
+        instagram: designer?.designer_insta_id,
         categories: [
           work.work_category_main.toLowerCase(),
           work.work_category_sub.toLowerCase(),
@@ -117,10 +117,12 @@ export default function WorkDetailPage({ params }: WorkDetailPageProps) {
                 <EmailIcon size={9} />
                 <span>{workData.email}</span>
               </div>
-              <div className="flex items-center gap-1 text-[9px] text-[#20202080]">
-                <InstagramIcon size={9} />
-                <span>{workData.instagram}</span>
-              </div>
+              {workData.instagram && (
+                <div className="flex items-center gap-1 text-[9px] text-[#20202080]">
+                  <InstagramIcon size={9} />
+                  <span>{workData.instagram}</span>
+                </div>
+              )}
             </div>
 
             {/* 작품 설명 */}
