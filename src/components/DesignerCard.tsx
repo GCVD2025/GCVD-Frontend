@@ -53,7 +53,7 @@ export default function DesignerCard({ designer }: DesignerCardProps) {
         {/* What: #808080 70% 투명도 배경과 8px 블러 효과가 적용된 오버레이 */}
         {/* How: absolute positioning과 backdrop-blur, bg-[#808080]/70을 사용하여 hover 시에만 표시 */}
         <div className="absolute inset-4 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#808080]/70 backdrop-blur-[8px] rounded-[10px_10px_10px_10px]">
-          <div className="text-white text-center">
+          <div className="text-white text-center flex flex-col items-center">
             <div className="text-[14px] font-bold">{workTitle}</div>
             <div className="text-[12px] flex items-center gap-1">
               보러가기 <span className="text-[14px]">→</span>
