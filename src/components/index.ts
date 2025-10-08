@@ -12,6 +12,7 @@ export { default as AboutSection } from "./AboutSection";
 export { default as AboutSection2 } from "./AboutSection2";
 export { default as HeroSection } from "./HeroSection";
 export { default as VideoSection } from "./VideoSection";
+export { default as ResponsiveImage } from "./ResponsiveImage";
 export { LoadingSpinner } from "./LoadingSpinner";
 export { ErrorMessage } from "./ErrorMessage";
 export { QueryProvider } from "./QueryProvider";

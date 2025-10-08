@@ -45,7 +45,10 @@ export default function DesignerCard({ designer }: DesignerCardProps) {
         onClick={handleViewWork}
       >
         <img
-          src={getImageSrc(`/images/designers/${designer_profile_image}`)}
+          loading="lazy"
+          src={getImageSrc(`/images/designers/${designer_profile_image}`, {
+            width: 160,
+          })}
           alt={designer_name}
           className="w-full h-45 object-cover rounded-[10px_10px_10px_10px] "
         />

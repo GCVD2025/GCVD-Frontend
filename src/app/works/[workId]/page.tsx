@@ -2,6 +2,7 @@ import { use } from "react";
 import { EmailIcon, InstagramIcon } from "@/components/icons";
 import { getCategoriesByQueryKeys } from "@/utils/categories";
 import { getImageSrc } from "../../../utils/getImageSrc";
+import { ResponsiveImage } from "@/components";
 import { worksData } from "../../../data/works";
 import { designersData } from "../../../data/designers";
 
@@ -141,18 +142,28 @@ export default function WorkDetailPage({ params }: WorkDetailPageProps) {
         <section className="w-full mx-auto flex flex-col items-center justify-center gap-4 ml-72 mr-[51px]">
           {workData.detailImages && workData.detailImages.length > 0 ? (
             workData.detailImages.map((imageName, index) => (
-              <img
+              <ResponsiveImage
                 key={index}
-                src={getImageSrc(`/images/works/detail/${imageName}`)}
+                src={`/images/works/detail/${imageName}`}
                 alt={`${workData.title} 상세 이미지 ${index + 1}`}
-                className="max-w-full object-contain rounded-lg shadow-lg"
+                sizes={{
+                  mobile: 100,
+                  tablet: 800,
+                  desktop: 1200,
+                  largeDesktop: 1600,
+                }}
               />
             ))
           ) : (
-            <img
-              src={getImageSrc("/images/works/detail/detail_sample1.png")}
+            <ResponsiveImage
+              src="/images/works/detail/detail_sample1.png"
               alt={`작품 ${workId}`}
-              className="max-w-full object-contain rounded-lg shadow-lg"
+              sizes={{
+                mobile: 400,
+                tablet: 800,
+                desktop: 1200,
+                largeDesktop: 1600,
+              }}
             />
           )}
         </section>
