@@ -12,8 +12,7 @@ export function getImageSrc(src: string, size?: ImageSize): string {
   // What: NEXT_PUBLIC_BASE_PATH 환경변수 값을 사용
   // How: 환경변수가 있으면 추가, 없으면 빈 문자열 사용
 
-  const basePath =
-    process.env.NEXT_PUBLIC_BASE_PATH || "https://gcvd-frontend.imgix.net";
+  const basePath = "https://gcvd-frontend.imgix.net";
   // https://gcvd2025.github.io/GCVD-Frontend
   // https://gcvd-frontend.imgix.net
 
