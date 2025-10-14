@@ -6,11 +6,13 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  // Why: 로컬(preview)과 GitHub Pages(배포)에서 서로 다른 베이스 경로 필요
-  // What: 환경변수로 베이스 경로를 주입하여 유연하게 설정
-  // How: 로컬은 빈 문자열, CI(GitHub Actions)에서는 "/GCVD-Frontend"로 설정
-  basePath: process.env.NEXT_PUBLIC_BASE_PATH ?? "",
-  assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH ?? "",
+  // Why: 커스텀 도메인 사용 시 루트 경로에서 서빙
+  // What: 커스텀 도메인에서는 basePath와 assetPrefix가 필요 없음
+  // How: 환경변수가 있을 때만 basePath 설정, 없으면 루트 경로 사용
+  ...(process.env.NEXT_PUBLIC_BASE_PATH && {
+    basePath: process.env.NEXT_PUBLIC_BASE_PATH,
+    assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH,
+  }),
 };
 
 export default nextConfig;

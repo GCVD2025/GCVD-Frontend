@@ -27,7 +27,9 @@ jobs:
         run: yarn build
         env:
           NODE_ENV: production
-          NEXT_PUBLIC_BASE_PATH: /GCVD-Frontend
+          # Why: 커스텀 도메인 사용 시 basePath 불필요
+          # What: 커스텀 도메인에서는 루트 경로에서 서빙
+          # How: NEXT_PUBLIC_BASE_PATH 환경변수 제거
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
