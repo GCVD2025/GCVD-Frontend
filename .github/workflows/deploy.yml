@@ -27,7 +27,6 @@ jobs:
         run: yarn build
         env:
           NODE_ENV: production
-          NEXT_PUBLIC_BASE_PATH: /GCVD-Frontend
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
