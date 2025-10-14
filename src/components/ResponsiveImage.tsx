@@ -22,7 +22,7 @@ interface ResponsiveImageProps {
 export default function ResponsiveImage({
   src,
   alt,
-  className = "w-full object-contain rounded-lg shadow-lg",
+  className = "w-full object-contain shadow-lg",
   loading = "lazy",
   sizes = {
     mobile: 100,

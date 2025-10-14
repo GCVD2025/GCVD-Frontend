@@ -139,7 +139,7 @@ export default function WorkDetailPage({ params }: WorkDetailPageProps) {
         {/* Why: 작품 상세 이미지를 중앙에 배치 */}
         {/* What: 작품의 실제 상세 이미지들을 표시 */}
         {/* How: workData.detailImages 배열을 순회하여 각 이미지를 표시 */}
-        <section className="w-full mx-auto flex flex-col items-center justify-center gap-4 ml-72 mr-[51px]">
+        <section className="w-full mx-auto flex flex-col items-center justify-center ml-72 mr-[51px]">
           {workData.detailImages && workData.detailImages.length > 0 ? (
             workData.detailImages.map((imageName, index) => {
               // Why: 디자이너 정보를 기반으로 새로운 폴더 구조에 맞는 이미지 경로 생성
