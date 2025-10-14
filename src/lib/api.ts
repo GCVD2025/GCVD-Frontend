@@ -11,6 +11,7 @@ type HttpMethod = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
 export interface ApiErrorData {
   message: string;
   status: number;
+
   details?: unknown;
 }
 
