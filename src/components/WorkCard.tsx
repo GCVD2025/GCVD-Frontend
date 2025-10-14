@@ -33,15 +33,19 @@ export default function WorkCard({
         (d) => d.designer_id === designerId[0]
       );
       if (designer) {
-        return getWorkThumbnailSrc(
+        const thumbnailPath = getWorkThumbnailSrc(
           designer.designer_english_name,
           designer.designer_id,
           id,
           imageUrl
         );
+        // Why: WorkCard에서는 일반 img 태그를 사용하므로 getImageSrc로 최적화 처리
+        // What: 썸네일 이미지에 적절한 크기 파라미터 적용
+        // How: getImageSrc 함수를 사용하여 반응형 최적화 적용
+        return getImageSrc(thumbnailPath, { width: 240, height: 192 });
       }
     }
-    return getImageSrc("/images/works/sample.png");
+    return getImageSrc("/images/works/sample.png", { width: 240, height: 192 });
   };
 
   return (
