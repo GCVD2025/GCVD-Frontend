@@ -1,7 +1,7 @@
 import { use } from "react";
 import { EmailIcon, InstagramIcon } from "@/components/icons";
 import { getCategoriesByQueryKeys } from "@/utils/categories";
-import { getImageSrc } from "../../../utils/getImageSrc";
+import { getImageSrc, getWorkDetailImageSrc } from "../../../utils/getImageSrc";
 import { ResponsiveImage } from "@/components";
 import { worksData } from "../../../data/works";
 import { designersData } from "../../../data/designers";
@@ -141,22 +141,37 @@ export default function WorkDetailPage({ params }: WorkDetailPageProps) {
         {/* How: workData.detailImages 배열을 순회하여 각 이미지를 표시 */}
         <section className="w-full mx-auto flex flex-col items-center justify-center gap-4 ml-72 mr-[51px]">
           {workData.detailImages && workData.detailImages.length > 0 ? (
-            workData.detailImages.map((imageName, index) => (
-              <ResponsiveImage
-                key={index}
-                src={`/images/works/detail/${imageName}`}
-                alt={`${workData.title} 상세 이미지 ${index + 1}`}
-                sizes={{
-                  mobile: 100,
-                  tablet: 800,
-                  desktop: 1200,
-                  largeDesktop: 1600,
-                }}
-              />
-            ))
+            workData.detailImages.map((imageName, index) => {
+              // Why: 디자이너 정보를 기반으로 새로운 폴더 구조에 맞는 이미지 경로 생성
+              // What: 첫 번째 디자이너의 정보를 사용하여 상세 이미지 경로 생성
+              // How: designers 배열에서 첫 번째 디자이너를 찾아서 새로운 폴더 구조에 맞는 경로 생성
+              const firstDesigner = designers[0];
+              const imageSrc = firstDesigner
+                ? getWorkDetailImageSrc(
+                    firstDesigner.designer_english_name,
+                    firstDesigner.designer_id,
+                    workId,
+                    imageName
+                  )
+                : getImageSrc(`/images/works/sample.png`);
+
+              return (
+                <ResponsiveImage
+                  key={index}
+                  src={imageSrc}
+                  alt={`${workData.title} 상세 이미지 ${index + 1}`}
+                  sizes={{
+                    mobile: 100,
+                    tablet: 800,
+                    desktop: 1200,
+                    largeDesktop: 1600,
+                  }}
+                />
+              );
+            })
           ) : (
             <ResponsiveImage
-              src="/images/works/detail/detail_sample1.png"
+              src={getImageSrc("/images/works/sample.png")}
               alt={`작품 ${workId}`}
               sizes={{
                 mobile: 400,

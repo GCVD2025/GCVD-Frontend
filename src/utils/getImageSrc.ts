@@ -7,6 +7,34 @@ interface ImageSize {
   height?: number;
 }
 
+// Why: 작품 썸네일 이미지 경로를 생성하는 함수
+// What: 디자이너 영어 이름, 디자이너 ID, 작품 ID를 기반으로 썸네일 이미지 경로 생성
+// How: 새로운 폴더 구조 {designer_english_name}_{designer_id}_{work_id}에 맞춰 경로 생성
+export function getWorkThumbnailSrc(
+  designerEnglishName: string,
+  designerId: string,
+  workId: string,
+  thumbnailFileName: string
+): string {
+  const basePath = "https://gcvd-frontend.imgix.net";
+  const folderPath = `/images/works/${designerEnglishName}_${workId}_${designerId}`;
+  return `${basePath}${folderPath}/${thumbnailFileName}?auto=compress&auto=format`;
+}
+
+// Why: 작품 상세 이미지 경로를 생성하는 함수
+// What: 디자이너 영어 이름, 디자이너 ID, 작품 ID를 기반으로 상세 이미지 경로 생성
+// How: 새로운 폴더 구조에 맞춰 상세 이미지 경로 생성
+export function getWorkDetailImageSrc(
+  designerEnglishName: string,
+  designerId: string,
+  workId: string,
+  detailImageFileName: string
+): string {
+  const basePath = "https://gcvd-frontend.imgix.net";
+  const folderPath = `/images/works/${designerEnglishName}_${designerId}_${workId}`;
+  return `${basePath}${folderPath}/${detailImageFileName}?auto=compress&auto=format`;
+}
+
 export function getImageSrc(src: string, size?: ImageSize): string {
   // Why: 환경변수로 basePath 설정을 통일하여 관리
   // What: NEXT_PUBLIC_BASE_PATH 환경변수 값을 사용

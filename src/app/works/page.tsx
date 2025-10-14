@@ -46,6 +46,8 @@ function WorksContent() {
           categories={work.work_categories.map((category) =>
             category.toLowerCase()
           )}
+          imageUrl={work.work_thumbnail}
+          designerId={work.designer_id}
         />
       ))}
     </section>

@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { getCategoriesByQueryKeys } from "@/utils/categories";
-import { getImageSrc } from "../utils/getImageSrc";
+import { getImageSrc, getWorkThumbnailSrc } from "../utils/getImageSrc";
+import { designersData } from "../data/designers";
 
 interface WorkCardProps {
   id: string;
@@ -10,6 +11,7 @@ interface WorkCardProps {
   author: string;
   imageUrl?: string;
   categories?: string[];
+  designerId?: string[];
 }
 
 export default function WorkCard({
@@ -18,15 +20,36 @@ export default function WorkCard({
   author,
   imageUrl,
   categories = [],
+  designerId = [],
 }: WorkCardProps) {
   const categoryItems = getCategoriesByQueryKeys(categories);
+
+  // Why: 디자이너 ID를 기반으로 디자이너 정보를 찾아서 이미지 경로 생성
+  // What: 첫 번째 디자이너의 영어 이름을 사용하여 썸네일 이미지 경로 생성
+  // How: designersData에서 매칭되는 디자이너를 찾아서 영어 이름으로 새로운 폴더 구조에 맞는 경로 생성
+  const getThumbnailSrc = () => {
+    if (designerId.length > 0 && imageUrl) {
+      const designer = designersData.find(
+        (d) => d.designer_id === designerId[0]
+      );
+      if (designer) {
+        return getWorkThumbnailSrc(
+          designer.designer_english_name,
+          designer.designer_id,
+          id,
+          imageUrl
+        );
+      }
+    }
+    return getImageSrc("/images/works/sample.png");
+  };
 
   return (
     <Link href={`/works/${id}`} className="block">
       <div className="backdrop-blur-[16px] w-[240px] h-[308px] rounded-[12px] bg-gradient(180deg, rgb(255, 255, 255) 80%, rgb(255, 255, 255) 40%) shadow-[0_0_24px_rgba(0,0,0,0.05)] overflow-hidden cursor-pointer hover:shadow-[0_0_32px_rgba(0,0,0,0.1)] hover:scale-102 transition-all duration-300 ease-in-out">
         <div className="w-full h-[192px]">
           <img
-            src={getImageSrc(imageUrl || "/images/works/sample.png")}
+            src={getThumbnailSrc()}
             alt={title}
             className="w-full h-full object-cover rounded-[0_0_12px_12px]"
           />
