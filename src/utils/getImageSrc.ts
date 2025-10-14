@@ -16,39 +16,33 @@ function getBasePath(): string {
 }
 
 // Why: 작품 썸네일 이미지 경로를 생성하는 함수
-// What: 디자이너 영어 이름, 디자이너 ID, 작품 ID를 기반으로 썸네일 이미지 경로 생성
-// How: 환경에 따라 로컬 경로 또는 imgix CDN 경로 생성 (최적화 파라미터 제외)
+// What: 디자이너 영어 이름, 디자이너 ID, 작품 ID를 기반으로 썸네일 이미지 상대 경로 생성
+// How: 단순히 상대 경로만 반환하여 책임 분리
 export function getWorkThumbnailSrc(
   designerEnglishName: string,
   designerId: string,
   workId: string,
   thumbnailFileName: string
 ): string {
-  const basePath = getBasePath();
-  const folderPath = `/images/works/${designerEnglishName}_${workId}_${designerId}`;
-
-  // Why: 단순히 경로만 반환하여 사용하는 컴포넌트에서 최적화 처리
-  // What: 최적화 파라미터는 사용하는 컴포넌트에서 처리
-  // How: basePath와 folderPath만 조합하여 반환
-  return `${basePath}${folderPath}/${thumbnailFileName}`;
+  // Why: 단순히 상대 경로만 반환하여 책임 분리
+  // What: basePath와 최적화는 getImageSrc에서 처리
+  // How: 폴더 구조만 반환
+  return `/images/works/${designerEnglishName}_${workId}_${designerId}/${thumbnailFileName}`;
 }
 
 // Why: 작품 상세 이미지 경로를 생성하는 함수
-// What: 디자이너 영어 이름, 디자이너 ID, 작품 ID를 기반으로 상세 이미지 경로 생성
-// How: 환경에 따라 로컬 경로 또는 imgix CDN 경로 생성 (최적화 파라미터 제외)
+// What: 디자이너 영어 이름, 디자이너 ID, 작품 ID를 기반으로 상세 이미지 상대 경로 생성
+// How: 단순히 상대 경로만 반환하여 책임 분리
 export function getWorkDetailImageSrc(
   designerEnglishName: string,
   designerId: string,
   workId: string,
   detailImageFileName: string
 ): string {
-  const basePath = getBasePath();
-  const folderPath = `/images/works/${designerEnglishName}_${workId}_${designerId}`;
-
-  // Why: 단순히 경로만 반환하여 ResponsiveImage에서 최적화 처리
-  // What: 최적화 파라미터는 ResponsiveImage 컴포넌트에서 처리
-  // How: basePath와 folderPath만 조합하여 반환
-  return `${basePath}${folderPath}/${detailImageFileName}`;
+  // Why: 단순히 상대 경로만 반환하여 책임 분리
+  // What: basePath와 최적화는 getImageSrc에서 처리
+  // How: 폴더 구조만 반환
+  return `/images/works/${designerEnglishName}_${workId}_${designerId}/${detailImageFileName}`;
 }
 
 // Why: 일반적인 이미지 경로를 생성하는 함수
