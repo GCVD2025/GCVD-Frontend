@@ -18,8 +18,7 @@ export default function BlurOverlay({
       className={className}
       style={{
         backdropFilter: `blur(${blurRadius}px)`,
-        maskImage: `linear-gradient(180deg, #000 calc(100% - ${scrollShadowSize}px), transparent)`,
-        WebkitMaskImage: `linear-gradient(180deg, #000 calc(100% - ${scrollShadowSize}px), transparent)`,
+        background: `linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) ${scrollShadowSize}px)`,
       }}
     />
   );

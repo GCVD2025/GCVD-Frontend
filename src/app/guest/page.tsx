@@ -64,9 +64,9 @@ export default function Guest() {
           {/* <div className="pointer-events-none h-80 fixed top-0 w-screen -z-10 bg-[linear-gradient(0deg,rgba(249,249,249,0.20)_0%,rgba(255, 255, 255, 0)_100%)] backdrop-blur-[12px]"></div> */}
           <BlurOverlay
             blurRadius={12}
-            className="fixed top-0 left-0 w-screen h-80 -z-10"
+            className="fixed top-0 left-0 w-screen h-75 -z-10"
           />
-          <div className="w-[764px] h-[152px] rounded-[16px] bg-white/60 backdrop-blur-[24px] drop-shadow-[0_0_24px_rgba(0,0,0,0.05)] p-4 flex items-end border-[1.5px] border-[#00A78E]/30 opacity-80">
+          <div className="w-[764px] h-[152px] rounded-[16px] bg-white/60 backdrop-blur-[20px] drop-shadow-[0_0_24px_rgba(0,0,0,0.05)] p-4 flex items-end border-[1.5px] border-[#00A78E]/30 opacity-80">
             <div className="flex-1 flex flex-col gap-2">
               <input
                 type="text"
