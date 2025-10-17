@@ -2,7 +2,7 @@
 // What: HTTP 클라이언트와 API 엔드포인트 관리
 // How: fetch API를 사용한 HTTP 클라이언트 구현
 
-const API_BASE_URL = "https://fac3888966e6.ngrok-free.app/api";
+const API_BASE_URL = "https://api.gcvd2025.com";
 
 // HTTP 메서드 타입 정의
 type HttpMethod = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
@@ -42,7 +42,6 @@ class ApiClient {
       method,
       headers: {
         "Content-Type": "application/json",
-        "ngrok-skip-browser-warning": "69420",
         ...headers,
       },
     };
