@@ -356,16 +356,16 @@ export const worksData: Work[] = [
       "work_detail_images": ["Lee Ga Young_detail1.png", "Lee Ga Young_detail2.png", "Lee Ga Young_detail3.png"],
       "work_description": "청춘은 ‘강렬’하고 ‘윤슬’처럼 반짝이며 마음 속에 아련한 ‘잔상’을 남깁니다. ‘청아’한 청춘은 너무나도 아름답고 가끔은 앞날에 대한 ‘공포’를 주지만 청춘의 그 모든 순간은 ‘무한’히 우리의 마음 속에서 춤출 것 입니다. 마치 파도처럼 말이죠. ‘청춘파도’는 여섯 청춘들의 도전, 우정, 사랑, 성장을 춤이라는 매개체를 통해 이야기합니다. 과연 주인공 송청아는 '청춘파도'라는 댄스 동아리에서 어떤 일을 겪으며 성장하게 될까요?"
     },
-    {
-      "work_id": "work-36",
-      "work_title": "OWNEST",
-      "work_sub_title": "Find on my nest",
-      "designer_id": ["user-37"],
-      "work_thumbnail": "Lee Hyun Ju_Th.png",
-      "work_categories": ["BRANDING"],
-      "work_detail_images": ["Lee Hyun Ju_detail1.png", "Lee Hyun Ju_detail2.png", "Lee Hyun Ju_detail3.png", "Lee Hyun Ju_detail4.png"],
-      "work_description": "OWNEST는 일상 속에서 잃어버린 '나'를 찾아가는 여정을 돕는 자기탐색 브랜드입니다. \n사람은 끊임없이 변하지만, 좋아하는 것들 속에서 자기 정체성을 발견합니다. 빛나는 것을 모아 둥지를 채우는 까마귀처럼, 우리는 좋아하는 마음을 통해 '나'를 발견하기도 합니다.\n이러한 영감을 담아, '나만의 둥지'라는 뜻의 OWN NEST를 결합하였습니다. 나만의 둥지 안에서 질문을 포함한 탐색 도구들을 통해 당신이 무심코 지나쳤던 내면의 가치와 반짝임을 발견하도록 돕습니다. 그 과정에서 긍정적인 감정을 인식하고, 자신만의 둥지를 채워가는 경험을 제공함으로써, 개개인의 삶에 긍정적인 희망을 소망합니다."
-    },
+    // {
+    //   "work_id": "work-36",
+    //   "work_title": "OWNEST",
+    //   "work_sub_title": "Find on my nest",
+    //   "designer_id": ["user-37"],
+    //   "work_thumbnail": "Lee Hyun Ju_Th.png",
+    //   "work_categories": ["BRANDING"],
+    //   "work_detail_images": ["Lee Hyun Ju_detail1.png", "Lee Hyun Ju_detail2.png", "Lee Hyun Ju_detail3.png", "Lee Hyun Ju_detail4.png"],
+    //   "work_description": "OWNEST는 일상 속에서 잃어버린 '나'를 찾아가는 여정을 돕는 자기탐색 브랜드입니다. \n사람은 끊임없이 변하지만, 좋아하는 것들 속에서 자기 정체성을 발견합니다. 빛나는 것을 모아 둥지를 채우는 까마귀처럼, 우리는 좋아하는 마음을 통해 '나'를 발견하기도 합니다.\n이러한 영감을 담아, '나만의 둥지'라는 뜻의 OWN NEST를 결합하였습니다. 나만의 둥지 안에서 질문을 포함한 탐색 도구들을 통해 당신이 무심코 지나쳤던 내면의 가치와 반짝임을 발견하도록 돕습니다. 그 과정에서 긍정적인 감정을 인식하고, 자신만의 둥지를 채워가는 경험을 제공함으로써, 개개인의 삶에 긍정적인 희망을 소망합니다."
+    // },
     {
       "work_id": "work-37",
       "work_title": "막내토끼 망토",
